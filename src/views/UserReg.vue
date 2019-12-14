@@ -1,0 +1,159 @@
+<template>
+  <div id="app">
+    <div class="main">
+      <div class="main_son">
+        <el-form :model="formModel" :rules="rules" ref="formModel">
+          <!-- <el-form-item v-for="(item,index) in form" :key="index"  :label="item.title">
+            <el-input v-model="item.modelName"  @input.native="change($event,index)" :placeholder="item.placeholder"></el-input>
+          </el-form-item>-->
+          <el-form-item label="用户名" prop="NameInput">
+            <el-input v-model="formModel.NameInput" placeholder="输入姓名"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="PassInput1">
+            <el-input
+              v-model="formModel.PassInput1"
+              placeholder="输入密码"
+              type="password"
+              show-password
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="确认密码" prop="PassInput2">
+            <el-input
+              v-model="formModel.PassInput2"
+              placeholder="再次确认"
+              type="password"
+              show-password
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="邮箱" prop="EmailInput">
+            <el-input v-model="formModel.EmailInput" placeholder="输入邮箱"></el-input>
+          </el-form-item>
+          <el-form-item label="手机号" prop="PhoneInput">
+            <el-input v-model="formModel.PhoneInput" placeholder="输入手机号"></el-input>
+          </el-form-item>
+          <el-form-item prop="code">
+            <el-button type="primary" style="width:40%;" plain>获取验证码</el-button>
+            <el-input
+              v-model="formModel.code"
+              style="margin-left:20%; width:40%;"
+              placeholder="输入验证码"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitCheck('formModel')" style="width:100%;">确认</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+    </div>
+    <public-footer-add1></public-footer-add1>
+    <public-footer-add2>
+      <div slot="footer_son_div1">药犹兵也。兵能卫人之死，不能养人之生。无病而服药，犹不乱而设兵也。</div>
+      <div
+        slot="footer_son_div2"
+      >Medicine is also a soldier. A soldier can save a man's death, but not his life. Taking medicine without a disease is like setting soldiers in disorder.</div>
+      <div slot="footer_son_div3">版权所有 @医疗药品管理系统 Copyright@2019 All rigth 免责申明|技术支持 @JST/LMK</div>
+    </public-footer-add2>
+  </div>
+</template>
+
+<script>
+import PublicHeader from "../components/PublicHeader.vue";
+import PublicFooterAdd1 from "../components/PublicFooterAdd1.vue";
+import PublicFooterAdd2 from "../components/PublicFooterAdd2.vue";
+
+export default {
+  name: "app",
+  components: {
+    PublicHeader,
+    PublicFooterAdd1,
+    PublicFooterAdd2
+  },
+  data() {
+    var validateName = (rule, value, callback) => {};
+    var validatePass = (rule, value, callback) => {
+      if (this.formModel.PassInput2 !== "") {
+        this.$refs.formModel.validateField("PassInput2");
+      } else {
+        callback();
+      }
+    };
+    var validatePassCheck = (rule, value, callback) => {
+      if (value !== this.formModel.PassInput1) {
+        callback(new Error("密码不一致"));
+      } else {
+        callback();
+      }
+    };
+    var validateEmailCheck = (rule, value, callback) => {
+      const standrd = /^\w{6,}@[a-z0-9]{2,3}\.[a-z]+$|\,$/;
+      if (!standrd.test(value)) {
+        callback(new Error("邮箱格式错误"));
+      } else {
+        callback();
+      }
+    };
+    var validatePhoneCheck = (rule, value, callback) => {
+      const standrd = /^1[0-9]{10}$/;
+      if (!standrd.test(value)) {
+        callback(new Error("手机格式错误"));
+      } else {
+        callback();
+      }
+    };
+
+    return {
+      rules: {
+        NameInput: [
+          { velidator: validateName, trigger: "blur" },
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          { min: 1, max: 6, message: "长度(1-6位)", trigger: "blur" }
+        ],
+        PassInput1: [
+          { velidator: validatePass, trigger: "blur" },
+          { required: true, message: "请输入密码", trigger: "blur" }
+        ],
+        PassInput2: [
+          { validator: validatePassCheck, trigger: "blur" },
+          { required: true, message: "请输入确认密码", trigger: "blur" }
+        ],
+        EmailInput: [
+          { validator: validateEmailCheck, trigger: "blur", required: true }
+        ],
+        PhoneInput: [
+          { validator: validatePhoneCheck, trigger: "blur", required: true }
+        ],
+        code: [{ required: true, message: "输入验证码", trigger: "blur" }]
+      },
+      formModel: {
+        NameInput: "",
+        PassInput1: "",
+        PassInput2: "",
+        EmailInput: "",
+        PhoneInput: "",
+        VeriInput: "",
+        code: ""
+      }
+    };
+  },
+  methods: {
+    change: function(e, index) {
+      // console.log(e.target.value);
+      // console.log(index);
+    },
+    submitCheck(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          alert("SUCCESS");
+        } else {
+          alert("请完整填写!!!");
+          return false;
+        }
+      });
+    }
+  }
+};
+</script>
+
+<style lang="less" scoped>
+@import "../assets/css/register.less";
+</style>
