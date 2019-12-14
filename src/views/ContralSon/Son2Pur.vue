@@ -1,7 +1,7 @@
 <template>
   <div id="Son2Pur">
     <div id="steps">
-      <el-steps :active="active" align-center>
+      <el-steps :active="$store.state.active" align-center>
         <el-step title="填写信息"></el-step>
         <el-step title="选择厂家"></el-step>
         <el-step title="提交完成"></el-step>
@@ -27,9 +27,7 @@
           ></el-date-picker>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitCheck('purchaseForm')" v-if="active == 2">
-            <router-link to="/contral/son2purnext" tag="span">确认</router-link>
-          </el-button>
+          <el-button type="primary" @click="submitCheck('purchaseForm')">确认</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -42,7 +40,7 @@ export default {
   data() {
     var validateName = (rule, value, callback) => {};
     return {
-      active: 1,
+      // active: 1,
       purchaseForm: {
         purName: "",
         purId: "",
@@ -68,9 +66,7 @@ export default {
           // { validate: validateNum, trigger: "blur" },
           { required: "true", message: "请输入数量", trigger: "blur" }
         ],
-        purDate: [
-          { required: "true", message: "请选择时间", trigger: "blur" }
-        ]
+        purDate: [{ required: "true", message: "请选择时间", trigger: "blur" }]
       }
     };
   },
@@ -78,7 +74,8 @@ export default {
     submitCheck: function(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.active++;
+          this.$store.commit('activeAdd')
+          this.$router.replace("/contral/son2purnext");
         } else {
           alert("请完整填写!!!");
           return false;
