@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
 const Home = () => import("@/views/Home");
 const UserReg = () => import("@/views/UserReg");
@@ -9,8 +9,9 @@ const Son1View = () => import("@/views/ContralSon/Son1View");
 const Son2Pur = () => import("@/views/ContralSon/Son2Pur");
 const Son3Info = () => import("@/views/ContralSon/Son3Info");
 const Son4Ser = () => import("@/views/ContralSon/Son4Ser");
+const Son2PurNext = () => import("@/views/ContralSon/Son2PurNext");
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -50,6 +51,10 @@ const routes = [
         component: Son2Pur
       },
       {
+        path: "/contral/son2purnext",
+        component: Son2PurNext
+      },
+      {
         path: "/contral/son3info",
         component: Son3Info
       },
@@ -62,9 +67,9 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;

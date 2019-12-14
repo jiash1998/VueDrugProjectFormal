@@ -141,6 +141,7 @@ export default {
       // console.log(index);
     },
     submitCheck(formName) {
+      // console.log(this.$refs[formName]);
       this.$refs[formName].validate(valid => {
         if (valid) {
           alert("SUCCESS");
