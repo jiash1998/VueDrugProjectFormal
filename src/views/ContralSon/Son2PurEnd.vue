@@ -1,7 +1,7 @@
 <template>
   <div id="son2purend">
     <div id="steps">
-      <el-steps :active="$store.state.active" align-center>
+      <el-steps :active="$store.state.active" align-center finish-status="success">
         <el-step title="填写信息"></el-step>
         <el-step title="选择厂家"></el-step>
         <el-step title="提交完成"></el-step>

@@ -50,15 +50,16 @@ const routes = [
       },
       {
         path: "/contral/son2pur",
-        component: Son2Pur
+        component: Son2Pur,
+        meta: { allback: false }
       },
       {
         path: "/contral/son2purnext",
-        component: Son2PurNext
+        component: Son2PurNext,
       },
       {
         path: "/contral/son2purend",
-        component: Son2PurEnd
+        component: Son2PurEnd,
       },
       {
         path: "/contral/son3info",
