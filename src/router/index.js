@@ -7,9 +7,11 @@ const SignIn = () => import("@/views/SignIn");
 const Contral = () => import("@/views/Contral");
 const Son1View = () => import("@/views/ContralSon/Son1View");
 const Son2Pur = () => import("@/views/ContralSon/Son2Pur");
+const Son2PurNext = () => import("@/views/ContralSon/Son2PurNext");
+const Son2PurEnd = () => import("@/views/ContralSon/Son2PurEnd");
 const Son3Info = () => import("@/views/ContralSon/Son3Info");
 const Son4Ser = () => import("@/views/ContralSon/Son4Ser");
-const Son2PurNext = () => import("@/views/ContralSon/Son2PurNext");
+
 
 Vue.use(VueRouter);
 
@@ -53,6 +55,10 @@ const routes = [
       {
         path: "/contral/son2purnext",
         component: Son2PurNext
+      },
+      {
+        path: "/contral/son2purend",
+        component: Son2PurEnd
       },
       {
         path: "/contral/son3info",

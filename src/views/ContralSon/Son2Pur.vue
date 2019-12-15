@@ -87,5 +87,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "../../assets/css/son2Pur.less";
+@import "../../assets/css/son2pur.less";
 </style>
