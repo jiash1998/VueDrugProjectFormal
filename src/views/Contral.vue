@@ -22,9 +22,9 @@
             </router-link>
           </el-menu-item>
           <el-menu-item index="4">
-            <i class="el-icon-user"></i>
-            <router-link to="/contral/son4ser" tag="span">
-              <span>在线客服</span>
+            <i class="el-icon-data-analysis"></i>
+            <router-link to="/contral/son4charts" tag="span">
+              <span>数据可视化</span>
             </router-link>
           </el-menu-item>
         </el-menu>

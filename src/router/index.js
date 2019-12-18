@@ -10,7 +10,7 @@ const Son2Pur = () => import("@/views/ContralSon/Son2Pur");
 const Son2PurNext = () => import("@/views/ContralSon/Son2PurNext");
 const Son2PurEnd = () => import("@/views/ContralSon/Son2PurEnd");
 const Son3Info = () => import("@/views/ContralSon/Son3Info");
-const Son4Ser = () => import("@/views/ContralSon/Son4Ser");
+const Son4Charts = () => import("@/views/ContralSon/Son4Charts");
 
 
 Vue.use(VueRouter);
@@ -55,19 +55,19 @@ const routes = [
       },
       {
         path: "/contral/son2purnext",
-        component: Son2PurNext,
+        component: Son2PurNext
       },
       {
         path: "/contral/son2purend",
-        component: Son2PurEnd,
+        component: Son2PurEnd
       },
       {
         path: "/contral/son3info",
         component: Son3Info
       },
       {
-        path: "/contral/son4ser",
-        component: Son4Ser
+        path: "/contral/son4charts",
+        component: Son4Charts
       }
     ]
   }

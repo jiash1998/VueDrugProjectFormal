@@ -1,7 +1,7 @@
 <template>
     <div id="son4ser">
         <div id="main">
-            <h2>暂时无客服</h2>
+            <h2>库存信息</h2>
         </div>
     </div>
 </template>
