@@ -20,7 +20,8 @@ export default {
   name: "son2purend",
   data() {
     return {};
-  }
+  },
+ 
 };
 </script>
 

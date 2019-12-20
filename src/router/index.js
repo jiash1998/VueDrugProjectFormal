@@ -55,7 +55,8 @@ const routes = [
       },
       {
         path: "/contral/son2purnext",
-        component: Son2PurNext
+        component: Son2PurNext,
+        meta: {allowBack: false}
       },
       {
         path: "/contral/son2purend",

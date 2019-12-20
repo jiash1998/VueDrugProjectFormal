@@ -73,7 +73,7 @@ export default {
           this.loading1 = true;
           setTimeout(() => {
             this.loading1 = false;
-            this.$router.replace('/contral/son2purend');
+            this.$router.replace("/contral/son2purend");
           }, 1000);
         } else {
           alert("请完整填写");

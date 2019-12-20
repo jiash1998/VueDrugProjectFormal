@@ -70,11 +70,17 @@ export default {
       }
     };
   },
+  created() {
+    history.pushState(null, null, document.URL);
+    window.addEventListener("popstate", function() {
+      history.pushState(null, null, document.URL);
+    });
+  },
   methods: {
     submitCheck: function(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$store.commit('activeAdd')
+          this.$store.commit("activeAdd");
           this.$router.replace("/contral/son2purnext");
         } else {
           alert("请完整填写!!!");

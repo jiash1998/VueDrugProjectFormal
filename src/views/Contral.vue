@@ -48,7 +48,20 @@ export default {
     PublicHeader,
     Son1View
   },
-  methods: {}
+  mounted() {
+    this.goBackListener();
+  },
+  destroyed() {
+    window.onpopstate = null; //销毁实例，以防影响其他页面
+  },
+  methods: {
+    goBackListener: function() {
+      var that = this; //window.onpopstate默认指向window,这里改变this指向
+      window.onpopstate = function() {
+        that.$store.commit("activeReduce");
+      };
+    }
+  }
 };
 </script>
 

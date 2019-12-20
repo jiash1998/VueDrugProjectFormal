@@ -13,6 +13,9 @@ export default new Vuex.Store({
   mutations: {
     activeAdd(state){
       return state.active++
+    },
+    activeReduce(state){
+      return state.active--
     }
   },
   actions: {
