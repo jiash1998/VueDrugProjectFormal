@@ -9,14 +9,22 @@
     </div>
     <div id="main">
       <el-form :model="purchaseForm" :rules="rules" ref="purchaseForm">
-        <el-form-item label="药品名称" prop="purName">
-          <el-input v-model="purchaseForm.purName" placeholder="输入药名"></el-input>
-        </el-form-item>
         <el-form-item label="批准文号" prop="purId">
-          <el-input v-model="purchaseForm.purId" placeholder="输入批准文号"></el-input>
+          <el-autocomplete
+            popper-class="my-autocomplete"
+            v-model="purchaseForm.purId"
+            :fetch-suggestions="querySearch"
+            placeholder="输入批准文号"
+            prop="purId"
+          >
+            <template slot-scope="{ item }">
+              <div class="name">{{ item.value }}</div>
+              <span class="addr">{{ item.name }}</span>
+            </template>
+          </el-autocomplete>
         </el-form-item>
-        <el-form-item label="药品数量" prop="purNum">
-          <el-input v-model="purchaseForm.purNum" placeholder="输入进货数量"></el-input>
+        <el-form-item label="药品规格" prop="purSpe">
+          <el-input v-model="purchaseForm.purSpe" placeholder="药品规格以g为单位"></el-input>
         </el-form-item>
         <el-form-item label="生产日期" prop="purDate">
           <el-date-picker
@@ -38,35 +46,43 @@
 export default {
   name: "Son2Pur",
   data() {
-    var validateName = (rule, value, callback) => {};
+    var validateId = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("批准文号(H/B/S+2位生产编号+6位数字)"));
+      } else {
+        callback();
+      }
+    };
+    var validateSpe = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("规格以g为单位"));
+      } else {
+        callback();
+      }
+    };
+    var validateDate = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("请选择时间"));
+      } else {
+        callback();
+      }
+    };
     return {
-      // active: 1,
       purchaseForm: {
-        purName: "",
         purId: "",
-        purNum: "",
-        purDate: "",
-        purFactory: ""
+        purSpe: "",
+        purDate: ""
       },
+      druginfo: [],
       PickerOption: {
         disabledDate(time) {
           return time.getTime() > Date.now();
         }
       },
       rules: {
-        purName: [
-          { validate: validateName, trigger: "blur" },
-          { required: "true", message: "请输入药品", trigger: "blur" }
-        ],
-        purId: [
-          // { validate: validateId, trigger: "blur" },
-          { required: "true", message: "请输入正确批准文号", trigger: "blur" }
-        ],
-        purNum: [
-          // { validate: validateNum, trigger: "blur" },
-          { required: "true", message: "请输入数量", trigger: "blur" }
-        ],
-        purDate: [{ required: "true", message: "请选择时间", trigger: "blur" }]
+        purId: [{ validator: validateId, change: "blur" }],
+        purSpe: [{ validator: validateSpe, trigger: "blur" }],
+        purDate: [{ validator: validateDate, trigger: "blur" }]
       }
     };
   },
@@ -75,6 +91,9 @@ export default {
     window.addEventListener("popstate", function() {
       history.pushState(null, null, document.URL);
     });
+  },
+  mounted() {
+    this.druginfo = this.loadAll();
   },
   methods: {
     submitCheck: function(formName) {
@@ -87,6 +106,31 @@ export default {
           return false;
         }
       });
+    },
+    querySearch(queryString, cb) {
+      var druginfo = this.druginfo;
+      var results = queryString
+        ? druginfo.filter(this.createFilter(queryString))
+        : druginfo;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter(queryString) {
+      return druginfo => {
+        return (
+          druginfo.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+        );
+      };
+    },
+    loadAll: function() {
+      return [
+        { value: "H20143140", name: "阿莫西林" },
+        { value: "H20023191", name: "布洛芬" },
+        { value: "H20173078", name: "头孢" },
+        { value: "H20034006", name: "阿奇霉素片" },
+        { value: "H45020401", name: "地塞米松片" },
+        { value: "H20033442", name: "红霉素胶囊" }
+      ];
     }
   }
 };

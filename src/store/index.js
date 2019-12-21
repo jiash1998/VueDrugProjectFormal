@@ -15,7 +15,8 @@ export default new Vuex.Store({
       return state.active++
     },
     activeReduce(state){
-      return state.active--
+      state.active > 1 ? state.active-- : state.active;
+      return state.active
     }
   },
   actions: {

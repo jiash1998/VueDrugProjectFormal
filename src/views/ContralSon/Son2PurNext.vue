@@ -11,15 +11,16 @@
       <el-form :model="facotryForm" :rules="rules" ref="facotryForm">
         <el-form-item label="选择厂家" prop="radioSel">
           <el-radio-group v-model="facotryForm.radioSel">
-            <el-radio label="上海厂家"></el-radio>
-            <el-radio label="合肥厂家"></el-radio>
-            <el-radio label="天津厂家"></el-radio>
+            <el-radio label="山东厂家"></el-radio>
+            <el-radio label="浙江厂家"></el-radio>
+            <el-radio label="北京厂家"></el-radio>
+            <el-radio label="江苏厂家"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="厂家单价">
           <el-input v-model="facotryForm.drugPrice" disabled></el-input>
         </el-form-item>
-        <el-form-item label="购买数量" prop="drugNum">
+        <el-form-item label="采购数量" prop="drugNum">
           <el-input v-model="facotryForm.drugNum" placeholder="输入数量"></el-input>
         </el-form-item>
         <el-form-item>

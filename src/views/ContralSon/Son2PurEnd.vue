@@ -20,10 +20,11 @@ export default {
   name: "son2purend",
   data() {
     return {};
-  },
- 
+  }
 };
+
 </script>
+
 
 <style lang="less" scoped>
 @import "../../assets/css/son2purend.less";
