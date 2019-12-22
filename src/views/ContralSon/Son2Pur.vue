@@ -23,7 +23,7 @@
             </template>
           </el-autocomplete>
         </el-form-item>
-        <el-form-item label="药品规格" prop="purSpe">
+        <el-form-item label="药品规格(g)" prop="purSpe">
           <el-input v-model="purchaseForm.purSpe" placeholder="药品规格以g为单位"></el-input>
         </el-form-item>
         <el-form-item label="生产日期" prop="purDate">
@@ -47,20 +47,24 @@ export default {
   name: "Son2Pur",
   data() {
     var validateId = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error("批准文号(H/B/S+2位生产编号+6位数字)"));
+      var testZ = /^(H(11|32|33|37)|S(11|32|33|37))\d{6}$/;
+      if (!value || !testZ.test(value)) {
+        console.log(value);
+        return callback(new Error("批准文号(H/S+2位厂家代码+6位数字)"));
       } else {
         callback();
       }
     };
     var validateSpe = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error("规格以g为单位"));
+      var testZ = /^0+(.[2-5]{1})?$/;
+      if (!value || !testZ.test(value)) {
+        return callback(new Error("规格可选(0.2|0.3|0.4|0.5)"));
       } else {
         callback();
       }
     };
     var validateDate = (rule, value, callback) => {
+        console.log(value);
       if (!value) {
         return callback(new Error("请选择时间"));
       } else {
@@ -124,10 +128,10 @@ export default {
     },
     loadAll: function() {
       return [
-        { value: "H20143140", name: "阿莫西林" },
-        { value: "H20023191", name: "布洛芬" },
-        { value: "H20173078", name: "头孢" },
-        { value: "H20034006", name: "阿奇霉素片" },
+        { value: "H32143140", name: "阿莫西林" },
+        { value: "H11023191", name: "布洛芬" },
+        { value: "H33173078", name: "头孢" },
+        { value: "H37034006", name: "阿奇霉素片" },
         { value: "H45020401", name: "地塞米松片" },
         { value: "H20033442", name: "红霉素胶囊" }
       ];

@@ -33,6 +33,31 @@
 export default {
   name: "son3info",
   data() {
+    var validateId = (rule, value, callback) => {
+      var testZ = /^(H(11|32|33|37)|S(11|32|33|37))\d{6}$/;
+      if (!value || !testZ.test(value)) {
+        console.log(value);
+        return callback(new Error("批准文号(H/S+2位厂家代码+6位数字)"));
+      } else {
+        callback();
+      }
+    };
+    var validateName = (rule, value, callback) => {
+      if (!value) {
+        return new callback("用户名不合法");
+      } else {
+        callback();
+      }
+    };
+    var validateNum = (rule, value, callback) => {
+      var testZ = /^[1-9]\d*$/;
+      if (!value || !testZ.test(value)) {
+        return new callback("数据格式错误");
+      } else {
+        callback();
+      }
+    };
+
     return {
       InfoForm: {
         DrugId: "",
@@ -41,27 +66,9 @@ export default {
         DrugModifyNum: ""
       },
       rules: {
-        DrugId: [
-          {
-            required: "true",
-            message: "请输入批准文号",
-            trigger: "blur"
-          }
-        ],
-        DrugModifyName: [
-          {
-            required: "true",
-            message: "请输入修改药名",
-            trigger: "blur"
-          }
-        ],
-        DrugModifyNum: [
-          {
-            required: "true",
-            message: "请输入修改数量",
-            trigger: "blur"
-          }
-        ]
+        DrugId: [{ validator: validateId, change: "blur" }],
+        DrugModifyName: [{ validator: validateName, change: "blur" }],
+        DrugModifyNum: [{ validator: validateNum, change: "blur" }]
       },
       loading: false
     };

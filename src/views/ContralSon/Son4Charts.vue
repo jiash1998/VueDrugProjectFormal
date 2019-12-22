@@ -2,6 +2,7 @@
   <div id="son4ser">
     <div id="main">
       <div id="myChart" :style="{width: '100%', height: '500px'}"></div>
+
     </div>
   </div>
 </template>
@@ -15,10 +16,25 @@ require("echarts/lib/component/legend");
 require("echarts/lib/component/legendScroll");
 export default {
   name: "son4ser",
+  data() {
+    return {
+      myarr:[]
+    }
+  },
   mounted() {
     this.drawLine();
+    this.axiosGet();
   },
   methods: {
+    axiosGet:function () {
+      this.axios.get('https://jiash1998.github.io/garbageJson/garbage.json').then(res =>{
+        var self = this;
+        self.myarr = res.data;
+        for(var i = 0; i < self.myarr.length; i++){
+          console.log(self.myarr[i]);
+        }
+      })
+    },
     drawLine() {
       let myChart = echarts.init(document.getElementById("myChart"));
       myChart.setOption({

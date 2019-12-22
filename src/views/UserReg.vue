@@ -69,16 +69,26 @@ export default {
     PublicFooterAdd2
   },
   data() {
-    var validateName = (rule, value, callback) => {};
+    var validateName = (rule, value, callback) => {
+      if (!value) {
+        return new callback("用户名格式错误");
+      } else {
+        callback();
+      }
+    };
     var validatePass = (rule, value, callback) => {
-      if (this.formModel.PassInput2 !== "") {
+      if (!value) {
+        return new callback("密码为空");
+      } else if (this.formModel.PassInput2 !== "") {
         this.$refs.formModel.validateField("PassInput2");
       } else {
         callback();
       }
     };
     var validatePassCheck = (rule, value, callback) => {
-      if (value !== this.formModel.PassInput1) {
+      if (!value) {
+        return new callback("密码为空");
+      } else if (value !== this.formModel.PassInput1) {
         callback(new Error("密码不一致"));
       } else {
         callback();
@@ -86,6 +96,9 @@ export default {
     };
     var validateEmailCheck = (rule, value, callback) => {
       const standrd = /^\w{6,}@[a-z0-9]{2,3}\.[a-z]+$|\,$/;
+      if (!value) {
+        return new callback("邮箱为空");
+      }
       if (!standrd.test(value)) {
         callback(new Error("邮箱格式错误"));
       } else {
@@ -94,7 +107,9 @@ export default {
     };
     var validatePhoneCheck = (rule, value, callback) => {
       const standrd = /^1[0-9]{10}$/;
-      if (!standrd.test(value)) {
+      if (!value) {
+        return new callback("手机号为空");
+      } else if (!standrd.test(value)) {
         callback(new Error("手机格式错误"));
       } else {
         callback();
@@ -103,25 +118,11 @@ export default {
 
     return {
       rules: {
-        NameInput: [
-          { velidator: validateName, trigger: "blur" },
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 1, max: 6, message: "长度(1-6位)", trigger: "blur" }
-        ],
-        PassInput1: [
-          { velidator: validatePass, trigger: "blur" },
-          { required: true, message: "请输入密码", trigger: "blur" }
-        ],
-        PassInput2: [
-          { validator: validatePassCheck, trigger: "blur" },
-          { required: true, message: "请输入确认密码", trigger: "blur" }
-        ],
-        EmailInput: [
-          { validator: validateEmailCheck, trigger: "blur", required: true }
-        ],
-        PhoneInput: [
-          { validator: validatePhoneCheck, trigger: "blur", required: true }
-        ],
+        NameInput: [{ validator: validateName, trigger: "blur" }],
+        PassInput1: [{ validator: validatePass, trigger: "blur" }],
+        PassInput2: [{ validator: validatePassCheck, trigger: "blur" }],
+        EmailInput: [{ validator: validateEmailCheck, trigger: "blur" }],
+        PhoneInput: [{ validator: validatePhoneCheck, trigger: "blur" }],
         code: [{ required: true, message: "输入验证码", trigger: "blur" }]
       },
       formModel: {

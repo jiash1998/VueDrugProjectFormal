@@ -40,6 +40,14 @@
 export default {
   name: "son2purnext",
   data() {
+    var validateNum = (rule,value,callback)=>{
+      var testZ = /^[1-9]\d*$/;
+      if(!value || !testZ.test(value)){
+        return (new callback("数据格式错误"));
+      }else{
+        callback();
+      }
+    }
     return {
       rules: {
         radioSel: [
@@ -50,11 +58,7 @@ export default {
           }
         ],
         drugNum: [
-          {
-            required: "true",
-            message: "请输入数量",
-            trigger: "blur"
-          }
+          {validator:validateNum,change:"blur"}
         ]
       },
       loading1: false,
