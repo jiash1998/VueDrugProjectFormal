@@ -2,11 +2,11 @@
   <div id="son1View">
     <div id="main_left">
       <el-collapse>
-        <el-collapse-item v-for="(item,index) in collpaseItem1" :key="index">
+        <el-collapse-item v-for="(item,index) in getDrug" :key="index">
           <template slot="title">
-            {{item.NameCn}}
+            {{item.drugName}}
             <i class="el-icon-info"></i>
-            ({{item.NameEn}})
+            ({{item.drugId}})
           </template>
           <div id="el-collapse-div-p">{{item.introduce}}</div>
         </el-collapse-item>
@@ -33,6 +33,10 @@ export default {
   data() {
     return {
       activeName: "1",
+      getDrug:[{
+        drugName:'',
+        drugId:''
+      }],
       collpaseItem1: [
         {
           NameCn: "阿莫西林胶囊",
@@ -147,11 +151,21 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.axiosGet();
+  },
   methods: {
     axiosGet:function(){
-      this.axios.get(' https://jiash1998.github.io/VueDrugProjectFormal/TestData.json').then(res=>{
-        console.log(res.data);
-        
+      this.axios.get('https://jiash1998.github.io/VueDrugProjectFormal/TestData.json').then(res=>{
+          // console.log(res.data);
+          var self = this;
+          self.getDrug = res.data;
+          // for (let i = 0; i < res.data.length; i++) {
+          //   self.getDrug[i].drugName = res.data[i].drugName;
+          //   self.getDrug[i].drugId = res.data[i].drugId;
+          // }
+          console.log(self.getDrug[0].drugNum);
+          
       })
     }
   },

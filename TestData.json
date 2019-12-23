@@ -6,141 +6,177 @@
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
         "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugId": "H32021459",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "阿莫西林胶囊",
-        "drugId": "H11033210",
+        "drugName": "头孢克肟片",
+        "drugId": "H33173078",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "阿奇霉素胶囊",
+        "drugId": "H37058413",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "醋酸地塞米松片",
+        "drugId": "H32020401",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "罗红霉素片",
+        "drugId": "H37065605",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "硫酸庆大霉素片",
+        "drugId": "H11023760",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "克拉霉素片",
+        "drugId": "H32183466",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "诺氟沙星胶囊",
+        "drugId": "H33021322",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "感冒灵颗粒",
+        "drugId": "H32020894",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "盐酸肾上腺素注射液",
+        "drugId": "H11021054",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "牛磺酸滴眼液",
+        "drugId": "H37059050",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "碳酸氢钠片",
+        "drugId": "H32024376",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "冻干人用狂犬病疫苗",
+        "drugId": "S11030033",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "盐酸环丙沙星滴眼液",
+        "drugId": "H33950330",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     },
     {
-        "drugName": "布洛芬片",
-        "drugId": "H11033210",
+        "drugName": "白喉抗毒素",
+        "drugId": "H32820147",
         "drugPrice": 23,
         "drugNum": 200,
         "drugSpe": 0.5,
         "drugProduct": "2019-09-12",
-        "drugShelflife": 24
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
+    },
+    {
+        "drugName": "氨苄西林胶囊",
+        "drugId": "H33021866",
+        "drugPrice": 23,
+        "drugNum": 200,
+        "drugSpe": 0.5,
+        "drugProduct": "2019-09-12",
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
+    },
+    {
+        "drugName": "破伤风抗毒素",
+        "drugId": "S11970021",
+        "drugPrice": 23,
+        "drugNum": 200,
+        "drugSpe": 0.5,
+        "drugProduct": "2019-09-12",
+        "drugShelflife": 24,
+        "drugIntrodution": "可用于治疗多种症状，包含风湿性疾病，某些皮肤病、严重过敏、哮喘、慢性阻塞性肺病、义膜性喉炎、脑水肿，也可能与抗生素合并用于结核病患者。"
     }
 ]
