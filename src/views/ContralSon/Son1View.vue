@@ -146,7 +146,15 @@ export default {
         }
       ]
     };
-  }
+  },
+  methods: {
+    axiosGet:function(){
+      this.axios.get(' https://jiash1998.github.io/VueDrugProjectFormal/TestData.json').then(res=>{
+        console.log(res.data);
+        
+      })
+    }
+  },
 };
 </script>
 
