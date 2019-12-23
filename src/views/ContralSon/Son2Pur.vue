@@ -64,7 +64,7 @@ export default {
       }
     };
     var validateDate = (rule, value, callback) => {
-        console.log(value);
+      console.log(value);
       if (!value) {
         return callback(new Error("请选择时间"));
       } else {
@@ -77,7 +77,6 @@ export default {
         purSpe: "",
         purDate: ""
       },
-      druginfo: [],
       PickerOption: {
         disabledDate(time) {
           return time.getTime() > Date.now();
@@ -96,9 +95,6 @@ export default {
       history.pushState(null, null, document.URL);
     });
   },
-  mounted() {
-    this.druginfo = this.loadAll();
-  },
   methods: {
     submitCheck: function(formName) {
       this.$refs[formName].validate(valid => {
@@ -112,12 +108,22 @@ export default {
       });
     },
     querySearch(queryString, cb) {
-      var druginfo = this.druginfo;
-      var results = queryString
-        ? druginfo.filter(this.createFilter(queryString))
-        : druginfo;
-      // 调用 callback 返回建议列表的数据
-      cb(results);
+      var myarr = [];
+      this.axios
+        .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
+        .then(res => {
+          for (let i = 0; i < res.data.length; i++) {
+            myarr.push({
+              value: res.data[i].drugId,
+              name: res.data[i].drugName
+            });
+          }
+          var results = queryString
+            ? myarr.filter(this.createFilter(queryString))
+            : myarr;
+          // 调用 callback 返回建议列表的数据
+          cb(results);
+        });
     },
     createFilter(queryString) {
       return druginfo => {
@@ -125,16 +131,6 @@ export default {
           druginfo.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
         );
       };
-    },
-    loadAll: function() {
-      return [
-        { value: "H32143140", name: "阿莫西林" },
-        { value: "H11023191", name: "布洛芬" },
-        { value: "H33173078", name: "头孢" },
-        { value: "H37034006", name: "阿奇霉素片" },
-        { value: "H45020401", name: "地塞米松片" },
-        { value: "H20033442", name: "红霉素胶囊" }
-      ];
     }
   }
 };

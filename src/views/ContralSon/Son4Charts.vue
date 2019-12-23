@@ -2,7 +2,6 @@
   <div id="son4ser">
     <div id="main">
       <div id="myChart" :style="{width: '100%', height: '500px'}"></div>
-
     </div>
   </div>
 </template>
@@ -18,93 +17,67 @@ export default {
   name: "son4ser",
   data() {
     return {
-      myarr:[]
-    }
+      myarr: []
+    };
   },
   mounted() {
     this.drawLine();
-    this.axiosGet();
   },
   methods: {
-    axiosGet:function () {
-      this.axios.get('https://jiash1998.github.io/garbageJson/garbage.json').then(res =>{
-        var self = this;
-        self.myarr = res.data;
-        for(var i = 0; i < self.myarr.length; i++){
-          console.log(self.myarr[i]);
-        }
-      })
-    },
-    drawLine() {
-      let myChart = echarts.init(document.getElementById("myChart"));
-      myChart.setOption({
-        title: { text: "药品库存" },
-        tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-          type: "scroll",
-          orient: "vertical",
-          right: 10,
-          top: 20,
-          bottom: 20,
-          data: [
-            "阿莫西林",
-            "头孢",
-            "扑热息痛",
-            "感冒灵",
-            "金嗓子",
-            "珍视明",
-            "999",
-            "",
-            "阿奇霉素",
-            "地塞米松",
-            "庆大霉素",
-            "克拉霉素",
-            "氟氯沙星",
-            "肾上腺素",
-            "碳酸氢钠"
-          ],
-          selected: {
-            红霉素: false,
-            阿奇霉素: false,
-            地塞米松: false,
-            庆大霉素: false,
-            克拉霉素: false,
-            氟氯沙星: false,
-            肾上腺素: false,
-            碳酸氢钠: false
+    drawLine(res) {
+      // var self = this;
+      var legendDrugName = [];
+      var seriesDrugName = [];
+      this.axios
+        .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
+        .then(res => {
+          for (let i = 0; i < res.data.length; i++) {
+            legendDrugName.push(res.data[i].drugName);
+            seriesDrugName.push({
+              name: res.data[i].drugName,
+              value: res.data[i].drugNum
+            });
           }
-        },
-        series: [
-          {
-            name: "药品",
-            type: "pie",
-            radius: "80%",
-            data: [
-              { value: 335, name: "阿莫西林" },
-              { value: 310, name: "头孢" },
-              { value: 274, name: "扑热息痛" },
-              { value: 235, name: "感冒灵" },
-              { value: 400, name: "金嗓子" },
-              { value: 325, name: "珍视明" },
-              { value: 120, name: "999" },
-              { value: 214, name: "红霉素" },
-              { value: 205, name: "阿奇霉素" },
-              { value: 490, name: "地塞米松" },
-              { value: 325, name: "庆大霉素" },
-              { value: 120, name: "克拉霉素" },
-              { value: 214, name: "氟氯沙星" },
-              { value: 205, name: "肾上腺素" },
-              { value: 490, name: "碳酸氢钠" }
-            ].sort(function(a, b) {
-              return a.value - b.value;
-            }),
-            roseType: "radius"
-          }
-        ]
-      });
+          let myChart = echarts.init(document.getElementById("myChart"));
+          // myChart.showLoading();
+          myChart.setOption({
+            title: { text: "药品库存" },
+            tooltip: {
+              trigger: "item",
+              formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+              type: "scroll",
+              orient: "vertical",
+              right: 10,
+              top: 20,
+              bottom: 20,
+              data: legendDrugName,
+              selected: {
+                盐酸肾上腺素注射液: false,
+                牛磺酸滴眼液: false,
+                碳酸氢钠片: false,
+                冻干人用狂犬病疫苗: false,
+                盐酸环丙沙星滴眼液: false,
+                白喉抗毒素: false,
+                氨苄西林胶囊: false,
+                破伤风抗毒素: false
+              }
+            },
+            series: [
+              {
+                name: "药品",
+                type: "pie",
+                radius: "80%",
+                // ].sort(function(a, b) {
+                //   return a.value - b.value;
+                // }),
+                data: seriesDrugName,
+                roseType: "radius"
+              }
+            ]
+          });
+        });
     }
   }
 };
