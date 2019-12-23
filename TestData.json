@@ -1,0 +1,29 @@
+[
+    {
+        "drugName": "阿莫西林胶囊",
+        "drugId": "H11033210",
+        "drugPrice": 23,
+        "drugNum": 200,
+        "drugSpe": 0.5,
+        "drugProduct": "2019-09-12",
+        "drugShelflife": 24
+    },
+    {
+        "drugName": "阿莫西林胶囊",
+        "drugId": "H11033210",
+        "drugPrice": 23,
+        "drugNum": 200,
+        "drugSpe": 0.5,
+        "drugProduct": "2019-09-12",
+        "drugShelflife": 24
+    },
+    {
+        "drugName": "阿莫西林胶囊",
+        "drugId": "H11033210",
+        "drugPrice": 23,
+        "drugNum": 200,
+        "drugSpe": 0.5,
+        "drugProduct": "2019-09-12",
+        "drugShelflife": 24
+    }
+]
