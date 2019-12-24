@@ -5,12 +5,13 @@
         <slot name="headerImg"></slot>
       </div>
       <div id="header_div2">
-        <slot name="headerName">
-        </slot>
+        <slot name="headerName"></slot>
       </div>
-
       <div id="header_div3">
         <slot name="headerTabs"></slot>
+      </div>
+      <div id="header_div4">
+        <slot name="headerAvatar"></slot>
       </div>
     </div>
     <div id="line"></div>
@@ -19,7 +20,12 @@
 
 <script>
 export default {
-  name: "publicHeader"
+  name: "publicHeader",
+  data() {
+    return {
+      avatarSize: "large"
+    };
+  }
 };
 </script>
 
@@ -45,7 +51,6 @@ export default {
   #header_div1 img {
     width: @headHeightOrHei - 30;
     height: @headHeightOrHei - 30;
-
   }
 
   #header_div2 {
@@ -59,9 +64,17 @@ export default {
 
   #header_div3 {
     float: right;
-    margin-right: 50px;
-    height: @AllWidth / 2;
+    width: 200px;
+    // background-color: aqua;
     line-height: @headHeightOrHei;
+  }
+
+  #header_div4 {
+    float: right;
+    width: 40px;
+    margin-right: -190px;
+    height: @headHeightOrHei;
+    // background-color: aquamarine;
   }
 }
 

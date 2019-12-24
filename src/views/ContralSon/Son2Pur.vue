@@ -23,10 +23,7 @@
             </template>
           </el-autocomplete>
         </el-form-item>
-        <el-form-item label="药品规格(g)" prop="purSpe">
-          <el-input v-model="purchaseForm.purSpe" placeholder="药品规格以g为单位"></el-input>
-        </el-form-item>
-        <el-form-item label="生产日期" prop="purDate">
+                <el-form-item label="生产日期" prop="purDate">
           <el-date-picker
             type="date"
             v-model="purchaseForm.purDate"
@@ -34,6 +31,10 @@
             :picker-options="PickerOption"
           ></el-date-picker>
         </el-form-item>
+        <el-form-item label="药品规格(g)" prop="purSpe">
+          <el-input v-model="purchaseForm.purSpe"  placeholder="药品规格以g为单位"></el-input>
+        </el-form-item>
+
         <el-form-item>
           <el-button type="primary" @click="submitCheck('purchaseForm')">确认</el-button>
         </el-form-item>

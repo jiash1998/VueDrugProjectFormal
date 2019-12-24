@@ -12,7 +12,9 @@
               <el-input v-model="form.input2" show-password placeholder="输入密码"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" style="width:40%;" plain>注册</el-button>
+              <el-button type="primary" style="width:40%;" plain>
+                <router-link to="/userReg" tag="span">注册</router-link>
+              </el-button>
               <el-button type="primary" style="margin-left:20%; width:40%;" @click="submit('form')">登录</el-button>
             </el-form-item>
           </el-form>

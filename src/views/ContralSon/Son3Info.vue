@@ -10,6 +10,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" plain>查询</el-button>
+          <el-button type="primary" plain>清空信息</el-button>
         </el-form-item>
         <el-form-item label="修改药名" prop="DrugModifyName">
           <el-input v-model="InfoForm.DrugModifyName" placeholder="输入修改药名"></el-input>
@@ -22,7 +23,7 @@
             type="primary"
             @click="submit('InfoForm')"
             v-loading.fullscreen.lock="loading"
-          >提交</el-button>
+          >提交修改</el-button>
         </el-form-item>
       </el-form>
     </div>
