@@ -10,7 +10,7 @@
           </template>
           <div id="el-collapse-div-p">{{item.drugIntrodution}}</div>
         </el-collapse-item>
-      </el-collapse>
+      </el-collapse>-->
     </div>
     <!-- <div id="main_right"></div> -->
   </div>
@@ -38,9 +38,8 @@ export default {
           self.getDrug = res.data;
           // console.log(self.getDrug[0].drugNum);
         })
-        .catch(err=>{
+        .catch(err => {
           console.log(err);
-          
         });
     }
   }

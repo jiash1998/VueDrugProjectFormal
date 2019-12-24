@@ -11,7 +11,8 @@ const Son2PurNext = () => import("@/views/ContralSon/Son2PurNext");
 const Son2PurEnd = () => import("@/views/ContralSon/Son2PurEnd");
 const Son3Info = () => import("@/views/ContralSon/Son3Info");
 const Son4Charts = () => import("@/views/ContralSon/Son4Charts");
-
+const Son5Export = () => import("@/views/ContralSon/Son5Export");
+const Son6Robot = () => import("@/views/ContralSon/Son6Robot");
 
 Vue.use(VueRouter);
 
@@ -56,7 +57,7 @@ const routes = [
       {
         path: "/contral/son2purnext",
         component: Son2PurNext,
-        meta: {allowBack: false}
+        meta: { allowBack: false }
       },
       {
         path: "/contral/son2purend",
@@ -69,6 +70,14 @@ const routes = [
       {
         path: "/contral/son4charts",
         component: Son4Charts
+      },
+      {
+        path: "/contral/son5export",
+        component: Son5Export
+      },
+      {
+        path: "/contral/son6robot",
+        component: Son6Robot
       }
     ]
   }

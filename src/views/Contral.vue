@@ -6,25 +6,37 @@
           <el-menu-item index="1">
             <i class="el-icon-picture-outline-round"></i>
             <router-link to="/contral/son1view" tag="span">
-              <span>查看药品</span>
+              <span>药品简介</span>
             </router-link>
           </el-menu-item>
           <el-menu-item index="2">
             <i class="el-icon-circle-plus-outline"></i>
             <router-link to="/contral/son2pur" tag="span">
-              <span>采购药品</span>
+              <span>药品采购</span>
             </router-link>
           </el-menu-item>
           <el-menu-item index="3">
             <i class="el-icon-refresh"></i>
             <router-link to="/contral/son3info" tag="span">
-              <span>修改信息</span>
+              <span>信息修改</span>
             </router-link>
           </el-menu-item>
           <el-menu-item index="4">
             <i class="el-icon-data-analysis"></i>
             <router-link to="/contral/son4charts" tag="span">
               <span>数据可视化</span>
+            </router-link>
+          </el-menu-item>
+          <el-menu-item index="5">
+            <i class="el-icon-document"></i>
+            <router-link to="/contral/son5export" tag="span">
+              <span>信息导出</span>
+            </router-link>
+          </el-menu-item>
+           <el-menu-item index="6">
+            <i class="el-icon-user"></i>
+            <router-link to="/contral/son6robot" tag="span">
+              <span>在线客服</span>
             </router-link>
           </el-menu-item>
         </el-menu>

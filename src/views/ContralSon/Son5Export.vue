@@ -1,0 +1,102 @@
+<template>
+  <div id="son1View">
+    <div id="main_left">
+      <table v-for="(item,index) in getDrug" :key="index">
+        <tr>
+          <td>{{item.drugName}}</td>
+          <td>{{item.drugId}}</td>
+          <td>{{item.drugPrice}}</td>
+          <td>{{item.drugNum}}</td>
+          <td>{{item.drugSpe}}</td>
+          <td>{{item.drugProduct}}</td>
+          <td>{{item.drugShelflife}}</td>
+        </tr>
+      </table>
+      <el-button type="primary" @click="export2Excel">导出</el-button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "son1View",
+  data() {
+    return {
+      activeName: "1",
+      getDrug:[]
+    };
+  },
+  mounted() {
+    this.axiosGet();
+  },
+  methods: {
+    axiosGet: function() {
+      this.axios
+        .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
+        .then(res => {
+          // console.log(res.data);
+          var self = this;
+          self.getDrug = res.data;
+          // console.log(self.getDrug[0].drugNum);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    export2Excel() {
+      this.axios
+        .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
+        .then(res => {
+          // var self = this;
+          // self.getDrug = res.data;
+          require.ensure([], () => {
+            const {
+              export_json_to_excel
+            } = require("../../excel/Export2Excel");
+            const tHeader = [
+              "姓名",
+              "批准文号",
+              "价格",
+              "数量",
+              "规格",
+              "生产日期",
+              "保质期"
+            ]; // 上面设置Excel的表格第一行的标题
+            const filterVal = [
+              "drugName",
+              "drugId",
+              "drugPrice",
+              "drugNum",
+              "drugSpe",
+              "drugProduct",
+              "drugShelflife"
+            ]; // 上面的index、phone_Num、school_Name是tableData里对象的属性
+            var tableData = [];
+            for (let i = 0; i < res.data.length; i++) {
+              tableData.push({
+                drugName: res.data[i].drugName,
+                drugId: res.data[i].drugId,
+                drugPrice: res.data[i].drugPrice,
+                drugNum: res.data[i].drugNum,
+                drugSpe: res.data[i].drugSpe,
+                drugProduct: res.data[i].drugProduct,
+                drugShelflife: res.data[i].drugShelflife
+              });
+            }
+            console.log(tableData);
+            const list = tableData; //把data里的tableData存到list
+            const data = this.formatJson(filterVal, list);
+            export_json_to_excel(tHeader, data, "列表excel");
+          });
+        });
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]));
+    }
+  }
+};
+</script>
+
+<style lang="less" scoped>
+@import "../../assets/css/son1view.less";
+</style>
