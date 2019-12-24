@@ -106,6 +106,8 @@ export default {
           alert("请完整填写!!!");
           return false;
         }
+        console.log();
+        
       });
     },
     querySearch(queryString, cb) {
