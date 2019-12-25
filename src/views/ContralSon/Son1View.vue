@@ -8,7 +8,7 @@
             <i class="el-icon-info"></i>
             ({{item.drugId}})
           </template>
-          <div id="el-collapse-div-p">{{item.drugIntrodution}}</div>
+          <div id="el-collapse-div-p">{{item.drugIntroduction}}</div>
         </el-collapse-item>
       </el-collapse>
     </div>
