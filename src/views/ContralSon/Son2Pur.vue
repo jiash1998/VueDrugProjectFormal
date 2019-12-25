@@ -57,6 +57,7 @@ export default {
       }
     };
     var validateSpe = (rule, value, callback) => {
+      console.log(value);
       var testZ = /^0+(.[2-5]{1})?$/;
       if (!value || !testZ.test(value)) {
         return callback(new Error("规格可选(0.2|0.3|0.4|0.5)"));
@@ -106,8 +107,6 @@ export default {
           alert("请完整填写!!!");
           return false;
         }
-        console.log();
-        
       });
     },
     querySearch(queryString, cb) {

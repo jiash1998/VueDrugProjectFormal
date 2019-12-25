@@ -11,10 +11,9 @@
       <el-form :model="facotryForm" :rules="rules" ref="facotryForm">
         <el-form-item label="选择厂家" prop="radioSel">
           <el-radio-group v-model="facotryForm.radioSel">
-            <el-radio label="山东厂家"></el-radio>
-            <el-radio label="浙江厂家"></el-radio>
-            <el-radio label="北京厂家"></el-radio>
-            <el-radio label="江苏厂家"></el-radio>
+            <el-radio label="进货商A"></el-radio>
+            <el-radio label="进货商B"></el-radio>
+            <el-radio label="进货商C"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="厂家单价">

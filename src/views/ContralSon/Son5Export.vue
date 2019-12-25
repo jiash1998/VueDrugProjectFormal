@@ -1,18 +1,16 @@
 <template>
   <div id="son1View">
     <div id="main_left">
-      <table v-for="(item,index) in getDrug" :key="index">
-        <tr>
-          <td>{{item.drugName}}</td>
-          <td>{{item.drugId}}</td>
-          <td>{{item.drugPrice}}</td>
-          <td>{{item.drugNum}}</td>
-          <td>{{item.drugSpe}}</td>
-          <td>{{item.drugProduct}}</td>
-          <td>{{item.drugShelflife}}</td>
-        </tr>
-      </table>
-      <el-button type="primary" @click="export2Excel">导出</el-button>
+      <el-button type="primary" @click="export2Excel" plain>Excel导出</el-button>
+      <el-table :data="getDrug" stripe>
+        <el-table-column label="药名" prop="drugName"></el-table-column>
+        <el-table-column label="批准文号" prop="drugId"></el-table-column>
+        <el-table-column label="价格" prop="drugPrice"></el-table-column>
+        <el-table-column label="库存" prop="drugNum"></el-table-column>
+        <el-table-column label="规格" prop="drugSpe"></el-table-column>
+        <el-table-column label="生产日期" prop="drugProduct"></el-table-column>
+        <el-table-column label="保质期" prop="drugShelflife"></el-table-column>
+      </el-table>
     </div>
   </div>
 </template>
@@ -34,10 +32,8 @@ export default {
       this.axios
         .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
         .then(res => {
-          // console.log(res.data);
           var self = this;
           self.getDrug = res.data;
-          // console.log(self.getDrug[0].drugNum);
         })
         .catch(err => {
           console.log(err);

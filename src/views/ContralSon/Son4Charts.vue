@@ -1,7 +1,7 @@
 <template>
   <div id="son4ser">
     <div id="main">
-      <div id="myChart" :style="{width: '100%', height: '500px'}"></div>
+      <div id="myChart" :style="{width: '100%', height: '700px'}"></div>
     </div>
   </div>
 </template>
@@ -50,7 +50,7 @@ export default {
               type: "scroll",
               orient: "vertical",
               right: 10,
-              top: 20,
+              top: 130,
               bottom: 20,
               data: legendDrugName,
               selected: {
@@ -68,7 +68,8 @@ export default {
               {
                 name: "药品",
                 type: "pie",
-                radius: "80%",
+                center:['45%','50%'],
+                radius: "65%",
                 // ].sort(function(a, b) {
                 //   return a.value - b.value;
                 // }),

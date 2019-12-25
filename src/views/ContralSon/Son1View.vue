@@ -10,7 +10,7 @@
           </template>
           <div id="el-collapse-div-p">{{item.drugIntrodution}}</div>
         </el-collapse-item>
-      </el-collapse>-->
+      </el-collapse>
     </div>
     <!-- <div id="main_right"></div> -->
   </div>
