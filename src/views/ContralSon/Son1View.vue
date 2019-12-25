@@ -27,13 +27,20 @@ export default {
   },
   mounted() {
     this.axiosGet();
+    this.ajaxGet();
   },
   methods: {
     axiosGet: function() {
       this.axios
-        .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
+        .get("http://192.168.43.6:8088/drugController/selectAllDrug")
+        // , {
+        //   retry: 5,
+        //   retryDelay: 1000
+        // }
+        //172.20.10.3:8088/drugController/selectAllDrug
+        // .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
         .then(res => {
-          // console.log(res.data);
+          console.log(res.data);
           var self = this;
           self.getDrug = res.data;
           // console.log(self.getDrug[0].drugNum);
@@ -41,6 +48,17 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    ajaxGet: function() {
+    //   this.axios
+    //     .get("http://192.168.43.6:8088/usercontroller/selectalluserinfo")
+    //     // .get("http://192.168.43.6:8088/drugController/selectAllDrug")
+    //     .then(res => {
+    //       console.log(res);
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
     }
   }
 };

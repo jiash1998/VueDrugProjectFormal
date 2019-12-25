@@ -5,17 +5,21 @@
       <div id="main_center">
         <div id="main_center_son">
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="用户名" prop="input1">
-              <el-input v-model="form.input1" placeholder="输入用户名"></el-input>
+            <el-form-item label="用户名" prop="username">
+              <el-input v-model="form.username" placeholder="输入用户名"></el-input>
             </el-form-item>
-            <el-form-item label="密码" prop="input2">
-              <el-input v-model="form.input2" show-password placeholder="输入密码"></el-input>
+            <el-form-item label="密码" prop="password">
+              <el-input v-model="form.password" show-password placeholder="输入密码"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" style="width:40%;" plain>
                 <router-link to="/userReg" tag="span">注册</router-link>
               </el-button>
-              <el-button type="primary" style="margin-left:20%; width:40%;" @click="submit('form')">登录</el-button>
+              <el-button
+                type="primary"
+                style="margin-left:20%; width:40%;"
+                @click="submit('form')"
+              >登录</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -39,6 +43,21 @@ export default {
       if (!value) {
         return new callback("用户名为空");
       } else {
+        this.axios
+          .get("http://192.168.43.6:8088/usercontroller/selectalluserinfo")
+          .then(res => {
+            console.log(value);
+            console.log(res);
+            for (let i = 0; i < res.data.length; i++) {
+              if (res.data[i].username == value) {
+                console.log("get name");
+                this.$store.commit("userNameSet",value);
+              }
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
         callback();
       }
     };
@@ -51,26 +70,26 @@ export default {
     };
     return {
       rules: {
-        input1: [{ validator: input1Validate, trigger: "blur" }],
-        input2: [{ validator: input2Validate, trigger: "blur" }]
+        username: [{ validator: input1Validate, change: "blur" }],
+        password: [{ validator: input2Validate, trigger: "blur" }]
       },
       form: {
-        input1: "",
-        input2: ""
+        username: "",
+        password: ""
       }
     };
   },
   methods: {
-    submit:function (formName) {
-      this.$refs[formName].validate(valid =>{
-        if(valid){
+    submit: function(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
           alert("success");
-        }else{
+        } else {
           alert("ERROR");
         }
-      })
+      });
     }
-  },
+  }
 };
 </script>
 

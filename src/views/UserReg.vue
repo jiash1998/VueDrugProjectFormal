@@ -3,33 +3,30 @@
     <div class="main">
       <div class="main_son">
         <el-form :model="formModel" :rules="rules" ref="formModel">
-          <!-- <el-form-item v-for="(item,index) in form" :key="index"  :label="item.title">
-            <el-input v-model="item.modelName"  @input.native="change($event,index)" :placeholder="item.placeholder"></el-input>
-          </el-form-item>-->
-          <el-form-item label="用户名" prop="NameInput">
-            <el-input v-model="formModel.NameInput" placeholder="输入姓名"></el-input>
+          <el-form-item label="用户名" prop="username">
+            <el-input v-model="formModel.username" placeholder="输入姓名"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="PassInput1">
+          <el-form-item label="密码" prop="password">
             <el-input
-              v-model="formModel.PassInput1"
+              v-model="formModel.password"
               placeholder="输入密码"
               type="password"
               show-password
             ></el-input>
           </el-form-item>
-          <el-form-item label="确认密码" prop="PassInput2">
+          <el-form-item label="确认密码" prop="passwordcheck">
             <el-input
-              v-model="formModel.PassInput2"
+              v-model="formModel.passwordcheck"
               placeholder="再次确认"
               type="password"
               show-password
             ></el-input>
           </el-form-item>
-          <el-form-item label="邮箱" prop="EmailInput">
-            <el-input v-model="formModel.EmailInput" placeholder="输入邮箱"></el-input>
+          <el-form-item label="邮箱" prop="useremail">
+            <el-input v-model="formModel.useremail" placeholder="输入邮箱"></el-input>
           </el-form-item>
-          <el-form-item label="手机号" prop="PhoneInput">
-            <el-input v-model="formModel.PhoneInput" placeholder="输入手机号"></el-input>
+          <el-form-item label="手机号" prop="usertel">
+            <el-input v-model="formModel.usertel" placeholder="输入手机号"></el-input>
           </el-form-item>
           <el-form-item prop="code">
             <el-button type="primary" style="width:40%;" plain>获取验证码</el-button>
@@ -118,20 +115,20 @@ export default {
 
     return {
       rules: {
-        NameInput: [{ validator: validateName, trigger: "blur" }],
-        PassInput1: [{ validator: validatePass, trigger: "blur" }],
-        PassInput2: [{ validator: validatePassCheck, trigger: "blur" }],
-        EmailInput: [{ validator: validateEmailCheck, trigger: "blur" }],
-        PhoneInput: [{ validator: validatePhoneCheck, trigger: "blur" }],
+        username: [{ validator: validateName, trigger: "blur" }],
+        password: [{ validator: validatePass, trigger: "blur" }],
+        passwordcheck: [{ validator: validatePassCheck, trigger: "blur" }],
+        useremail: [{ validator: validateEmailCheck, trigger: "blur" }],
+        usertel: [{ validator: validatePhoneCheck, trigger: "blur" }],
         code: [{ required: true, message: "输入验证码", trigger: "blur" }]
       },
       formModel: {
-        NameInput: "",
-        PassInput1: "",
-        PassInput2: "",
-        EmailInput: "",
-        PhoneInput: "",
-        VeriInput: "",
+        username: "",
+        password: "",
+        passwordcheck: "",
+        useremail: "",
+        usertel: "",
+        // VeriInput: "",
         code: ""
       }
     };
