@@ -7,12 +7,7 @@
             <el-input v-model="formModel.username" placeholder="输入姓名"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
-            <el-input
-              v-model="formModel.password"
-              placeholder="输入密码"
-              type="password"
-              show-password
-            ></el-input>
+            <el-input v-model="formModel.password" placeholder="输入密码" type="password" show-password></el-input>
           </el-form-item>
           <el-form-item label="确认密码" prop="passwordcheck">
             <el-input
@@ -22,16 +17,22 @@
               show-password
             ></el-input>
           </el-form-item>
+          <!-- <el-form-item label="密码" prop="password">
+            <el-input v-model="formModel.password" placeholder="输入姓名"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="passwordcheck">
+            <el-input v-model="formModel.passwordcheck" placeholder="输入姓名"></el-input>
+          </el-form-item> -->
           <el-form-item label="邮箱" prop="useremail">
             <el-input v-model="formModel.useremail" placeholder="输入邮箱"></el-input>
           </el-form-item>
           <el-form-item label="手机号" prop="usertel">
             <el-input v-model="formModel.usertel" placeholder="输入手机号"></el-input>
           </el-form-item>
-          <el-form-item prop="code">
+          <el-form-item prop="idcode">
             <el-button type="primary" style="width:40%;" plain>获取验证码</el-button>
             <el-input
-              v-model="formModel.code"
+              v-model="formModel.idcode"
               style="margin-left:20%; width:40%;"
               placeholder="输入验证码"
             ></el-input>
@@ -57,6 +58,7 @@
 import PublicHeader from "../components/PublicHeader.vue";
 import PublicFooterAdd1 from "../components/PublicFooterAdd1.vue";
 import PublicFooterAdd2 from "../components/PublicFooterAdd2.vue";
+import qs from "querystring";
 
 export default {
   name: "app",
@@ -76,8 +78,8 @@ export default {
     var validatePass = (rule, value, callback) => {
       if (!value) {
         return new callback("密码为空");
-      } else if (this.formModel.PassInput2 !== "") {
-        this.$refs.formModel.validateField("PassInput2");
+      } else if (this.formModel.passwordcheck !== "") {
+        this.$refs.formModel.validateField("passwordcheck");
       } else {
         callback();
       }
@@ -85,7 +87,7 @@ export default {
     var validatePassCheck = (rule, value, callback) => {
       if (!value) {
         return new callback("密码为空");
-      } else if (value !== this.formModel.PassInput1) {
+      } else if (value !== this.formModel.password) {
         callback(new Error("密码不一致"));
       } else {
         callback();
@@ -112,24 +114,29 @@ export default {
         callback();
       }
     };
-
+    var validateCodeCheck = (rule, value, callback) => {
+      if (!value) {
+        return new callback("验证码为空");
+      } else {
+        callback();
+      }
+    };
     return {
       rules: {
         username: [{ validator: validateName, trigger: "blur" }],
-        password: [{ validator: validatePass, trigger: "blur" }],
-        passwordcheck: [{ validator: validatePassCheck, trigger: "blur" }],
+        password: [{ validator: validateName, trigger: "blur" }],
+        passwordcheck: [{ validator: validateName, trigger: "blur" }],
         useremail: [{ validator: validateEmailCheck, trigger: "blur" }],
-        usertel: [{ validator: validatePhoneCheck, trigger: "blur" }],
-        code: [{ required: true, message: "输入验证码", trigger: "blur" }]
+        usertel: [{ validator: validatePhoneCheck, trigger: "blur" }]
+        // idcode: [{ validator: validateCodeCheck, trigger: "blur" }]
       },
       formModel: {
         username: "",
         password: "",
         passwordcheck: "",
         useremail: "",
-        usertel: "",
-        // VeriInput: "",
-        code: ""
+        usertel: ""
+        // idcode: ""
       }
     };
   },
@@ -139,12 +146,28 @@ export default {
       // console.log(index);
     },
     submitCheck(formName) {
-      // console.log(this.$refs[formName]);
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          alert("SUCCESS");
+      console.log("enter");
+      this.$refs[formName].validate(val => {
+        console.log(val);
+        if (val) {
+          // console.log(this.formModel);
+          var data = this.formModel;
+          console.log(data);
+          this.axios
+            .post(
+              "http://192.168.43.6:8088/usercontroller/userreginfo",
+              qs.stringify(data),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }
+              }
+            )
+            .then(res => {
+              console.log("axios success");
+            });
         } else {
-          alert("请完整填写!!!");
+          alert("ERROR");
           return false;
         }
       });

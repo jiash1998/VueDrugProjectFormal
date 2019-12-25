@@ -27,7 +27,7 @@ export default {
   },
   mounted() {
     this.axiosGet();
-    this.ajaxGet();
+    // this.ajaxGet();
   },
   methods: {
     axiosGet: function() {
@@ -37,16 +37,14 @@ export default {
         //   retry: 5,
         //   retryDelay: 1000
         // }
-        //172.20.10.3:8088/drugController/selectAllDrug
         // .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
         .then(res => {
           console.log(res.data);
           var self = this;
           self.getDrug = res.data;
-          // console.log(self.getDrug[0].drugNum);
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
         });
     },
     ajaxGet: function() {

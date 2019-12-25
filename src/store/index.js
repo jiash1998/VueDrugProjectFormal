@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     active: 1,
-    getusername: "1"
+    getusername: ""
   },
   getters: {},
   mutations: {

@@ -82,6 +82,8 @@ export default {
   methods: {
     submit: function(formName) {
       this.$refs[formName].validate(valid => {
+        console.log(valid);
+        
         if (valid) {
           alert("success");
         } else {
