@@ -2,23 +2,30 @@
   <div id="son3info">
     <div id="main">
       <el-form :model="InfoForm" ref="InfoForm" :rules="rules">
-        <el-form-item label="批准文号" prop="DrugId">
-          <el-input v-model="InfoForm.DrugId" placeholder="输入批准文号"></el-input>
+        <el-form-item label="批准文号" prop="drugId">
+          <el-input v-model="InfoForm.drugId" placeholder="输入批准文号"></el-input>
+        </el-form-item>
+        <el-form-item label="药品名称">
+          <el-input v-model="InfoForm.drugName"></el-input>
         </el-form-item>
         <el-form-item label="药品库存">
-          <el-input v-model="InfoForm.DrugNum" disabled></el-input>
+          <el-input v-model="InfoForm.drugNum"></el-input>
+        </el-form-item>
+        <el-form-item label="药品库存">
+          <el-input v-model="InfoForm.drugPrice"></el-input>
+        </el-form-item>
+        <el-form-item label="药品规格">
+          <el-input v-model="InfoForm.drugSpe" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="生产日期">
+          <el-input v-model="InfoForm.drugProduct" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="保质期">
+          <el-input v-model="InfoForm.drugShelflife" disabled></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" plain>查询</el-button>
+          <el-button type="primary" @click="drugselect" plain>查询</el-button>
           <el-button type="primary" plain>清空信息</el-button>
-        </el-form-item>
-        <el-form-item label="修改药名" prop="DrugModifyName">
-          <el-input v-model="InfoForm.DrugModifyName" placeholder="输入修改药名"></el-input>
-        </el-form-item>
-        <el-form-item label="修改数量" prop="DrugModifyNum">
-          <el-input v-model="InfoForm.DrugModifyNum" placeholder="输入修改数量"></el-input>
-        </el-form-item>
-        <el-form-item>
           <el-button
             type="primary"
             @click="submit('InfoForm')"
@@ -31,6 +38,7 @@
 </template>
 
 <script>
+import qs from "querystring";
 export default {
   name: "son3info",
   data() {
@@ -61,30 +69,76 @@ export default {
 
     return {
       InfoForm: {
-        DrugId: "",
-        DrugNum: "",
-        DrugModifyName: "",
-        DrugModifyNum: ""
+        drugId: "",
+        drugName: "",
+        drugNum: "",
+        drugPrice: "",
+        drugSpe: "",
+        drugProduct: "",
+        drugShelflife: ""
       },
       rules: {
-        DrugId: [{ validator: validateId, change: "blur" }],
-        DrugModifyName: [{ validator: validateName, change: "blur" }],
-        DrugModifyNum: [{ validator: validateNum, change: "blur" }]
+        drugId: [{ validator: validateId, change: "blur" }]
       },
       loading: false
     };
   },
   methods: {
+    drugselect: function() {
+      var self = this;
+      var data = { drugId: this.InfoForm.drugId };
+      this.axios
+        .post(
+          "http://192.168.43.6:8088/drugController/selectdrugnumfromdrugid",
+          qs.stringify(data),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }
+          }
+        )
+        .then(res => {
+          console.log(res);
+          if (res.data == "") {
+            alert("不存在此文号,请重新输入");
+          } else {
+            self.InfoForm = res.data;
+            self.InfoForm = JSON.parse(JSON.stringify(self.InfoForm));
+          }
+          console.log(self.InfoForm);
+        });
+    },
+    handlechange: function(e) {
+      this.$set(this.input, "drugName", "Listing is still available");
+    },
     submit(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.loading = true;
-          setTimeout(() => {
-            this.loading = false;
-          }, 1000);
-        } else {
-        }
-      });
+      // this.$refs[formName].validate(valid => {
+      //   if (valid) {
+      //     this.loading = true;
+      //     setTimeout(() => {
+      //       this.loading = false;
+      //     }, 1000);
+      //   } else {
+      //   }
+      // });
+      var data = this.InfoForm;
+      console.log(data);
+      this.axios
+        .post(
+          "http://192.168.43.6:8088/drugController/updatedrugnameanddrugnum",
+          qs.stringify(data),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }
+          }
+        )
+        .then(res => {
+          console.log("enter");
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

@@ -29,7 +29,8 @@ export default {
       var legendDrugName = [];
       var seriesDrugName = [];
       this.axios
-        .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
+        // .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
+        .get("http://192.168.43.6:8088/drugController/selectAllDrug")
         .then(res => {
           for (let i = 0; i < res.data.length; i++) {
             legendDrugName.push(res.data[i].drugName);
@@ -54,8 +55,8 @@ export default {
               bottom: 20,
               data: legendDrugName,
               selected: {
-                盐酸肾上腺素注射液: false,
-                牛磺酸滴眼液: false,
+                诺氟沙星胶囊: false,
+                氨苄西林胶囊: false,
                 碳酸氢钠片: false,
                 冻干人用狂犬病疫苗: false,
                 盐酸环丙沙星滴眼液: false,
