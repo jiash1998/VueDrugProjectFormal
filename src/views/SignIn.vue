@@ -5,8 +5,8 @@
       <div id="main_center">
         <div id="main_center_son">
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="用户名" prop="username">
-              <el-input v-model="form.username" placeholder="输入用户名"></el-input>
+            <el-form-item label="用户名/手机" prop="usertest">
+              <el-input v-model="form.usertest" placeholder="用户名/手机"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
               <el-input v-model="form.password" show-password placeholder="输入密码"></el-input>
@@ -32,6 +32,7 @@
 <script>
 import PublicHeader from "../components/PublicHeader.vue";
 import PublicFooterAdd1 from "../components/PublicFooterAdd1.vue";
+import qs from "querystring";
 export default {
   name: "home",
   components: {
@@ -42,22 +43,22 @@ export default {
     var input1Validate = (rule, value, callback) => {
       if (!value) {
         return new callback("用户名为空");
-      } else {
-        this.axios
-          .get("http://192.168.43.6:8088/usercontroller/selectalluserinfo")
-          .then(res => {
-            console.log(value);
-            console.log(res);
-            for (let i = 0; i < res.data.length; i++) {
-              if (res.data[i].username == value) {
-                console.log("get name");
-                this.$store.commit("userNameSet",value);
-              }
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
+      } 
+        // this.axios
+        //   .get("http://192.168.43.6:8088/usercontroller/selectalluserinfo")
+        //   .then(res => {
+        //     console.log(value);
+        //     for (let i = 0; i < res.data.length; i++) {
+        //       if (res.data[i].username == value) {
+        //         console.log("get name");
+        //         this.$store.commit("userNameSet", value);
+        //       }
+        //     }
+        //   })
+        //   .catch(err => {
+        //     console.log(err);
+        //   });
+      else {
         callback();
       }
     };
@@ -70,24 +71,39 @@ export default {
     };
     return {
       rules: {
-        username: [{ validator: input1Validate, change: "blur" }],
+        usertest: [{ validator: input1Validate, trigger: "blur" }],
         password: [{ validator: input2Validate, trigger: "blur" }]
       },
       form: {
-        username: "",
+        usertest: "",
         password: ""
       }
     };
   },
   methods: {
     submit: function(formName) {
-      this.$refs[formName].validate(valid => {
-        console.log(valid);
-        
-        if (valid) {
-          alert("success");
+      console.log(this.form);
+      this.$refs[formName].validate(val => {
+        console.log("enter");
+        if (val) {
+          var data = this.form;
+          console.log(data);
+          this.axios
+            .post(
+              "http://192.168.43.6:8088/usercontroller/selectalluserinfo",
+              qs.stringify(data),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }
+              }
+            )
+            .then(res => {
+              alert("post success");
+            });
         } else {
-          alert("ERROR");
+          alert("post error");
+          return false;
         }
       });
     }

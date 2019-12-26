@@ -22,7 +22,7 @@
           </el-form-item>
           <el-form-item label="密码" prop="passwordcheck">
             <el-input v-model="formModel.passwordcheck" placeholder="输入姓名"></el-input>
-          </el-form-item> -->
+          </el-form-item>-->
           <el-form-item label="邮箱" prop="useremail">
             <el-input v-model="formModel.useremail" placeholder="输入邮箱"></el-input>
           </el-form-item>
@@ -30,7 +30,7 @@
             <el-input v-model="formModel.usertel" placeholder="输入手机号"></el-input>
           </el-form-item>
           <el-form-item prop="idcode">
-            <el-button type="primary" style="width:40%;" plain>获取验证码</el-button>
+            <el-button type="primary" style="width:40%;" @click="getidcode" plain>获取验证码</el-button>
             <el-input
               v-model="formModel.idcode"
               style="margin-left:20%; width:40%;"
@@ -115,8 +115,11 @@ export default {
       }
     };
     var validateCodeCheck = (rule, value, callback) => {
+      const standrd = /^[0-9]{6}$/;
       if (!value) {
         return new callback("验证码为空");
+      } else if (!standrd.test(value)) {
+        callback(new Error("验证码格式错误"));
       } else {
         callback();
       }
@@ -127,16 +130,16 @@ export default {
         password: [{ validator: validateName, trigger: "blur" }],
         passwordcheck: [{ validator: validateName, trigger: "blur" }],
         useremail: [{ validator: validateEmailCheck, trigger: "blur" }],
-        usertel: [{ validator: validatePhoneCheck, trigger: "blur" }]
-        // idcode: [{ validator: validateCodeCheck, trigger: "blur" }]
+        usertel: [{ validator: validatePhoneCheck, trigger: "blur" }],
+        idcode: [{ validator: validateCodeCheck, trigger: "blur" }]
       },
       formModel: {
         username: "",
         password: "",
         passwordcheck: "",
         useremail: "",
-        usertel: ""
-        // idcode: ""
+        usertel: "",
+        idcode: ""
       }
     };
   },
@@ -145,12 +148,28 @@ export default {
       // console.log(e.target.value);
       // console.log(index);
     },
+    getidcode() {
+      console.log(this.formModel.usertel);
+      var data2 = { usertel: this.formModel.usertel };
+      this.axios
+        .post(
+          "http://192.168.43.6:8088/usercontroller/accepttel",
+          qs.stringify(data2),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }
+          }
+        )
+        .then(res => {
+          console.log("telephone success");
+        });
+    },
     submitCheck(formName) {
       console.log("enter");
       this.$refs[formName].validate(val => {
         console.log(val);
         if (val) {
-          // console.log(this.formModel);
           var data = this.formModel;
           console.log(data);
           this.axios
@@ -164,10 +183,10 @@ export default {
               }
             )
             .then(res => {
-              console.log("axios success");
+              alert("post success");
             });
         } else {
-          alert("ERROR");
+          alert("post error");
           return false;
         }
       });

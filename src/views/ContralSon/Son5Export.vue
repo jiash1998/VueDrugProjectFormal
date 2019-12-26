@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       activeName: "1",
-      getDrug:[]
+      getDrug: []
     };
   },
   mounted() {
@@ -30,7 +30,8 @@ export default {
   methods: {
     axiosGet: function() {
       this.axios
-        .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
+        .get("http://192.168.43.6:8088/drugController/selectAllDrug")
+        // .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
         .then(res => {
           var self = this;
           self.getDrug = res.data;
@@ -41,7 +42,8 @@ export default {
     },
     export2Excel() {
       this.axios
-        .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
+        .get("http://192.168.43.6:8088/drugController/selectAllDrug")
+        // .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
         .then(res => {
           // var self = this;
           // self.getDrug = res.data;
