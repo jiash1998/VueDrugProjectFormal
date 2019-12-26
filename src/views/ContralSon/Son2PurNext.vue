@@ -9,8 +9,9 @@
     </div>
     <div id="main">
       <el-form :model="facotryForm" :rules="rules" ref="facotryForm">
-        <el-form-item label="选择厂家" prop="radioSel">
-          <el-radio-group v-model="facotryForm.radioSel" @change="groupChange">
+        <el-form-item label="选择厂家" prop="sourcename">
+          <!-- @change="groupChange" -->
+          <el-radio-group v-model="facotryForm.sourcename" @change="groupChange">
             <el-radio-button label="供货商A" v-if="$store.state.sourcenameA"></el-radio-button>
             <el-radio-button label="供货商A" v-else disabled></el-radio-button>
             <el-radio-button label="供货商B" v-if="$store.state.sourcenameB"></el-radio-button>
@@ -28,7 +29,7 @@
         <el-form-item>
           <el-button
             type="primary"
-            v-model="facotryForm.submitB"
+
             v-loading.fullscreen.lock="loading1"
             @click="submit('facotryForm')"
           >提交付款</el-button>
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+import qs from "querystring";
 export default {
   name: "son2purnext",
   data() {
@@ -59,16 +61,17 @@ export default {
             trigger: "blur"
           }
         ],
-        drugNum: [{ validator: validateNum, change: "blur" }]
+        sourcedrugnum: [{ validator: validateNum, change: "blur" }]
       },
       loading1: false,
       facotryForm: {
-        radioSel: "",
+        sourcename: "",
         sourcedrugprice: "",
         sourcedrugnum: "",
-        submitB: ""
+        // submitB: ""            v-model="facotryForm.submitB"
       },
-      sourceInfo: []
+      sourceInfo: [],
+      radioValue:''
     };
   },
   mounted() {
@@ -84,8 +87,8 @@ export default {
   },
   methods: {
     groupChange(value) {
+      this.radioValue = value;
       var drugData = this.$store.state.purchaseDrugInfo.data;
-
       if (value == drugData[0].sourcename) {
         console.log("A");
         this.facotryForm.sourcedrugprice = drugData[0].sourcedrugprice;
@@ -99,15 +102,33 @@ export default {
       console.log(drugData.length);
     },
     submit(formName) {
+      console.log(this.radioValue);
+      console.log(this.facotryForm);
+      var data = this.facotryForm;
       this.$refs[formName].validate(valid => {
         if (valid) {
-          // $store.state.getusername
-          this.$store.commit("activeAdd");
-          this.loading1 = true;
-          setTimeout(() => {
-            this.loading1 = false;
-            this.$router.replace("/contral/son2purend");
-          }, 1000);
+          this.axios
+            .post(
+              "http://192.168.43.6:8088/sourcecontroller/updatedrugnumfromdrugid",
+              qs.stringify(data),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }
+              }
+            )
+            .then(res => {
+              console.log(res);
+              this.$store.commit("activeAdd");
+              this.loading1 = true;
+              setTimeout(() => {
+                this.loading1 = false;
+                this.$router.replace("/contral/son2purend");
+              }, 1000);
+            })
+            .catch(err => {
+              console.log(err);
+            });
         } else {
           alert("请完整填写");
           return false;
