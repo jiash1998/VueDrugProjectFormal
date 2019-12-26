@@ -24,6 +24,9 @@
           </el-autocomplete>-->
           <el-input v-model="purchaseForm.sourcedrugid" placeholder="输入批准文号"></el-input>
         </el-form-item>
+        <el-form-item label="药品规格(g)" prop="purSpe">
+          <el-input v-model="purchaseForm.sourcedrugspe" placeholder="药品规格以g为单位" disabled></el-input>
+        </el-form-item>
         <el-form-item label="生产日期" prop="purDate">
           <el-date-picker
             type="date"
@@ -32,12 +35,9 @@
             :picker-options="PickerOption"
           ></el-date-picker>
         </el-form-item>
-        <el-form-item label="药品规格(g)" prop="purSpe">
-          <el-input v-model="purchaseForm.sourcedrugspe" placeholder="药品规格以g为单位"></el-input>
-        </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitCheck('purchaseForm')">确认</el-button>
-          <!-- <el-button type="primary" @click="submit">确认</el-button> -->
+          <el-button type="primary" @click="submit" plain>查询</el-button>
+          <el-button type="primary" @click="submitCheck('purchaseForm')">提交</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import qs from "querystring";
 export default {
   name: "Son2Pur",
   data() {
@@ -98,12 +99,19 @@ export default {
       history.pushState(null, null, document.URL);
     });
   },
+  mounted() {
+    this.$store.commit("sourcenameRstroeA");
+    this.$store.commit("sourcenameRstroeB");
+    this.$store.commit("sourcenameRstroeC");
+  },
   methods: {
     submit: function() {
+      var self = this;
+      var data = this.purchaseForm;
       this.axios
         .post(
-          "http://192.168.43.6:8088/usercontroller/selectalluserinfo",
-          qs.stringify(data2),
+          "http://192.168.43.6:8088/sourcecontroller/selectsourcefromsourcedrugid",
+          qs.stringify(data),
           {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded"
@@ -111,7 +119,10 @@ export default {
           }
         )
         .then(res => {
-          console.log(res);
+          this.$store.commit("purchaseDrugInfoModfiy", res);
+          self.purchaseForm = this.$store.state.purchaseDrugInfo.data[0];
+          self.purchaseForm = JSON.parse(JSON.stringify(self.purchaseForm));
+          console.log(this.$store.state.purchaseDrugInfo.data[0].sourcedrugspe);
         })
         .catch(err => {
           console.log(err);
@@ -119,27 +130,10 @@ export default {
     },
     submitCheck: function(formName) {
       this.$refs[formName].validate(valid => {
+        var self = this;
         if (valid) {
-          var data = this.purchaseForm;
-          this.axios
-            .post(
-              "http://192.168.43.6:8088/usercontroller/selectalluserinfo",
-              qs.stringify(data),
-              {
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded"
-                }
-              }
-            )
-            .then(res => {
-              console.log(res);
-              this.$store.commit("purchaseDrugInfo",res);
-              this.$store.commit("activeAdd");
-              this.$router.replace("/contral/son2purnext");
-            })
-            .catch(err => {
-              console.log(err);
-            });
+          this.$store.commit("activeAdd");
+          this.$router.replace("/contral/son2purnext");
         } else {
           alert("请完整填写!!!");
           return false;

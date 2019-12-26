@@ -1,12 +1,11 @@
 <template>
   <div>
-    <P>ROBOT</P>
+    <h1>记录</h1>
     <div id="main"></div>
   </div>
 </template>
 
 <script>
-import Botui from "../../Botui/botui.min.js";
 export default {
   name: "app",
   components: {
@@ -24,6 +23,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "../../Botui/botui.min.css";
-@import "../../Botui/botui-theme-default.css";
+
 </style>

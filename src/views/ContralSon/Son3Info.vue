@@ -11,12 +11,12 @@
         <el-form-item label="药品库存">
           <el-input v-model="InfoForm.drugNum"></el-input>
         </el-form-item>
-        <el-form-item label="药品库存">
+        <el-form-item label="药品价格">
           <el-input v-model="InfoForm.drugPrice"></el-input>
         </el-form-item>
-        <el-form-item label="药品规格">
+        <!-- <el-form-item label="药品规格">
           <el-input v-model="InfoForm.drugSpe" disabled></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="生产日期">
           <el-input v-model="InfoForm.drugProduct" disabled></el-input>
         </el-form-item>
@@ -25,7 +25,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="drugselect" plain>查询</el-button>
-          <el-button type="primary" plain>清空信息</el-button>
+          <el-button type="primary" native-type="reset" plain>清空信息</el-button>
           <el-button
             type="primary"
             @click="submit('InfoForm')"

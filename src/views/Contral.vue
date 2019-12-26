@@ -33,10 +33,10 @@
               <span>信息导出</span>
             </router-link>
           </el-menu-item>
-           <el-menu-item index="6">
-            <i class="el-icon-user"></i>
-            <router-link to="/contral/son6robot" tag="span">
-              <span>在线客服</span>
+          <el-menu-item index="6">
+            <i class="el-icon-view"></i>
+            <router-link to="/contral/Son6record" tag="span">
+              <span>记录跟踪</span>
               <!-- // -->
             </router-link>
           </el-menu-item>

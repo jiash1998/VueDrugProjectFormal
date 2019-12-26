@@ -12,7 +12,7 @@ const Son2PurEnd = () => import("@/views/ContralSon/Son2PurEnd");
 const Son3Info = () => import("@/views/ContralSon/Son3Info");
 const Son4Charts = () => import("@/views/ContralSon/Son4Charts");
 const Son5Export = () => import("@/views/ContralSon/Son5Export");
-const Son6Robot = () => import("@/views/ContralSon/Son6Robot");
+const Son6Record = () => import("@/views/ContralSon/Son6Record");
 
 Vue.use(VueRouter);
 
@@ -76,8 +76,8 @@ const routes = [
         component: Son5Export
       },
       {
-        path: "/contral/son6robot",
-        component: Son6Robot
+        path: "/contral/son6record",
+        component: Son6Record
       }
     ]
   }

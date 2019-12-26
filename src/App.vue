@@ -8,7 +8,7 @@
       <div slot="headerTabs">
         <!-- <el-button type="primary" size="small" plain>
           <router-link to="/signin" tag="span">登 录</router-link>
-        </el-button> -->
+        </el-button>-->
         <el-button type="primary" size="small" plain>
           <router-link to="/userReg" tag="span">注 册</router-link>
         </el-button>
@@ -17,15 +17,16 @@
         </el-button>
       </div>
       <div slot="headerAvatar">
-        <span>{{$store.state.getusername}}</span>
-        <div id="headerAvatar_img">
-          <router-link to="/signin" tag="span">
-          <!-- https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png -->
-            <img
-              id="avatar"
-              src="./assets/img/avatar.png"
-            />
-          </router-link>
+        <div id="header_userDiv">
+          <div id="header_usernameDiv">
+            <span>{{$store.state.getusername}}</span>
+          </div>
+          <div id="headerAvatar_img">
+            <router-link to="/signin" tag="span">
+              <!-- https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png -->
+              <img id="avatar" src="./assets/img/avatar.png" />
+            </router-link>
+          </div>
         </div>
       </div>
     </public-header>
@@ -55,7 +56,7 @@ export default {
     PublicHeader,
     PublicFooterAdd1,
     PublicFooterAdd2
-  },
+  }
 };
 </script>
 <style lang="less">
@@ -64,13 +65,28 @@ body {
   padding: 0;
   cursor: pointer;
 
-  #headerAvatar_img {
-    // background-color: aqua;
-    #avatar {
-      height: 40px;
-      width: 40px;
-      border-radius: 5px;
-      margin-top:50%; 
+  #header_userDiv {
+    width: 100px;
+    height: 80px;
+    // background-color: pink;
+    #headerAvatar_img {
+      width: 50%;
+      float: right;
+      // background-color: aqua;
+      #avatar {
+        height: 40px;
+        width: 40px;
+        border-radius: 5px;
+        margin-top: 40%;
+      }
+    }
+
+    #header_usernameDiv {
+      // background-color: pink;
+      float: right;
+      width: 50%;
+      margin-top: 40%;
+      font-size: 1.2em;
     }
   }
 }

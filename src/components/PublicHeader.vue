@@ -64,15 +64,16 @@ export default {
 
   #header_div3 {
     float: right;
-    width: 200px;
+    width: 130px;
     // background-color: aqua;
+    margin-right:130px;
     line-height: @headHeightOrHei;
   }
 
   #header_div4 {
     float: right;
     width: 40px;
-    margin-right: -190px;
+    margin-right: -200px;
     height: @headHeightOrHei;
     // background-color: aquamarine;
   }
