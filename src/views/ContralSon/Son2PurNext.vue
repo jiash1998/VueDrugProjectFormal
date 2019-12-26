@@ -73,6 +73,8 @@ export default {
     submit(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
+          // $store.state.getusername
+          console.log(this.$store.state.purchaseDrugInfo);
           this.$store.commit("activeAdd");
           this.loading1 = true;
           setTimeout(() => {

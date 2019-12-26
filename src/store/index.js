@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     active: 1,
-    getusername: ""
+    getusername: "",
+    purchaseDrugInfo: {}
   },
   getters: {},
   mutations: {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     userNameSet(state, payload) {
       return (state.getusername = payload);
+    },
+    purchaseDrugInfoModfiy(state, payload) {
+      return (state.purchaseDrugInfo = payload);
     }
   },
   actions: {},

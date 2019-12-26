@@ -10,7 +10,7 @@
     <div id="main">
       <el-form :model="purchaseForm" :rules="rules" ref="purchaseForm">
         <el-form-item label="批准文号" prop="purId">
-          <el-autocomplete
+          <!-- <el-autocomplete
             popper-class="my-autocomplete"
             v-model="purchaseForm.purId"
             :fetch-suggestions="querySearch"
@@ -21,22 +21,23 @@
               <div class="name">{{ item.value }}</div>
               <span class="addr">{{ item.name }}</span>
             </template>
-          </el-autocomplete>
+          </el-autocomplete>-->
+          <el-input v-model="purchaseForm.sourcedrugid" placeholder="输入批准文号"></el-input>
         </el-form-item>
-                <el-form-item label="生产日期" prop="purDate">
+        <el-form-item label="生产日期" prop="purDate">
           <el-date-picker
             type="date"
-            v-model="purchaseForm.purDate"
+            v-model="purchaseForm.sourcedrugproduct"
             placeholder="选择日期"
             :picker-options="PickerOption"
           ></el-date-picker>
         </el-form-item>
         <el-form-item label="药品规格(g)" prop="purSpe">
-          <el-input v-model="purchaseForm.purSpe"  placeholder="药品规格以g为单位"></el-input>
+          <el-input v-model="purchaseForm.sourcedrugspe" placeholder="药品规格以g为单位"></el-input>
         </el-form-item>
-
         <el-form-item>
           <el-button type="primary" @click="submitCheck('purchaseForm')">确认</el-button>
+          <!-- <el-button type="primary" @click="submit">确认</el-button> -->
         </el-form-item>
       </el-form>
     </div>
@@ -75,9 +76,9 @@ export default {
     };
     return {
       purchaseForm: {
-        purId: "",
-        purSpe: "",
-        purDate: ""
+        sourcedrugid: "",
+        sourcedrugsep: "",
+        sourcedrugproduct: ""
       },
       PickerOption: {
         disabledDate(time) {
@@ -85,9 +86,9 @@ export default {
         }
       },
       rules: {
-        purId: [{ validator: validateId, change: "blur" }],
-        purSpe: [{ validator: validateSpe, trigger: "blur" }],
-        purDate: [{ validator: validateDate, trigger: "blur" }]
+        sourcedrugid: [{ validator: validateId, change: "blur" }],
+        sourcedrugsep: [{ validator: validateSpe, trigger: "blur" }],
+        sourcedrugproduct: [{ validator: validateDate, trigger: "blur" }]
       }
     };
   },
@@ -98,11 +99,47 @@ export default {
     });
   },
   methods: {
+    submit: function() {
+      this.axios
+        .post(
+          "http://192.168.43.6:8088/usercontroller/selectalluserinfo",
+          qs.stringify(data2),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }
+          }
+        )
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     submitCheck: function(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$store.commit("activeAdd");
-          this.$router.replace("/contral/son2purnext");
+          var data = this.purchaseForm;
+          this.axios
+            .post(
+              "http://192.168.43.6:8088/usercontroller/selectalluserinfo",
+              qs.stringify(data),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }
+              }
+            )
+            .then(res => {
+              console.log(res);
+              this.$store.commit("purchaseDrugInfo",res);
+              this.$store.commit("activeAdd");
+              this.$router.replace("/contral/son2purnext");
+            })
+            .catch(err => {
+              console.log(err);
+            });
         } else {
           alert("请完整填写!!!");
           return false;

@@ -43,22 +43,7 @@ export default {
     var input1Validate = (rule, value, callback) => {
       if (!value) {
         return new callback("用户名为空");
-      } 
-        // this.axios
-        //   .get("http://192.168.43.6:8088/usercontroller/selectalluserinfo")
-        //   .then(res => {
-        //     console.log(value);
-        //     for (let i = 0; i < res.data.length; i++) {
-        //       if (res.data[i].username == value) {
-        //         console.log("get name");
-        //         this.$store.commit("userNameSet", value);
-        //       }
-        //     }
-        //   })
-        //   .catch(err => {
-        //     console.log(err);
-        //   });
-      else {
+      } else {
         callback();
       }
     };
@@ -100,6 +85,7 @@ export default {
             )
             .then(res => {
               alert("post success");
+              this.$store.commit("userNameSet", value);
             });
         } else {
           alert("post error");
