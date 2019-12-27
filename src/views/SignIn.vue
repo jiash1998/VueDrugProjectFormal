@@ -3,8 +3,14 @@
     <div class="main">
       <!-- <div id="main_aside"></div> -->
       <div id="main_center">
-        <div id="main_center_son">
+        <div id="main_center_son1">
           <el-form :model="form" :rules="rules" ref="form">
+            <!-- <el-form-item label="">
+              <el-radio-group v-model="form.usertest" >
+                <el-radio-button label="用户名" ></el-radio-button>
+                <el-radio-button label="手机号"></el-radio-button>
+              </el-radio-group>
+            </el-form-item> -->
             <el-form-item label="用户名/手机" prop="usertest">
               <el-input v-model="form.usertest" placeholder="用户名/手机"></el-input>
             </el-form-item>
@@ -22,6 +28,8 @@
               >登录</el-button>
             </el-form-item>
           </el-form>
+          <!-- <div id="main_center_son2">
+          </div> -->
         </div>
       </div>
     </div>
@@ -61,7 +69,8 @@ export default {
       },
       form: {
         usertest: "",
-        password: ""
+        password: "",
+        // idcode: ""
       }
     };
   },
@@ -85,7 +94,10 @@ export default {
             )
             .then(res => {
               alert("post success");
-              this.$store.commit("userNameSet", value);
+              console.log(res);
+              this.$store.commit("userNameSet", res.data.username);
+            }).catch(err=>{
+              alert("post error");
             });
         } else {
           alert("post error");

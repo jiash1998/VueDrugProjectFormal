@@ -84,7 +84,7 @@ export default {
             console.log(tableData);
             const list = tableData; //把data里的tableData存到list
             const data = this.formatJson(filterVal, list);
-            export_json_to_excel(tHeader, data, "列表excel");
+            export_json_to_excel(tHeader, data, "库存信息表");
           });
         });
     },

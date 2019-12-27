@@ -6,13 +6,10 @@
         <router-link to="/home" tag="div">海秀医疗药品管理</router-link>
       </div>
       <div slot="headerTabs">
-        <!-- <el-button type="primary" size="small" plain>
-          <router-link to="/signin" tag="span">登 录</router-link>
-        </el-button>-->
         <el-button type="primary" size="small" plain>
           <router-link to="/userReg" tag="span">注 册</router-link>
         </el-button>
-        <el-button type="primary" size="small" plain>
+        <el-button type="primary" size="small" :disabled="this.btnstate != -1 ? false : true" plain>
           <router-link to="/contral" tag="span">控 制</router-link>
         </el-button>
       </div>
@@ -56,6 +53,11 @@ export default {
     PublicHeader,
     PublicFooterAdd1,
     PublicFooterAdd2
+  },
+  data() {
+    return {
+      btnstate: -1
+    };
   }
 };
 </script>
@@ -86,7 +88,7 @@ body {
       float: right;
       width: 50%;
       margin-top: 40%;
-      font-size: 1.2em;
+      // font-size: 1em;
     }
   }
 }

@@ -3,11 +3,17 @@
     <div class="main">
       <div class="main_son">
         <el-form :model="formModel" :rules="rules" ref="formModel">
-          <el-form-item label="用户名" prop="username">
-            <el-input v-model="formModel.username" placeholder="输入姓名"></el-input>
+          <el-form-item label="用户名" prop="username" @input.native="postname">
+            <el-input v-model="formModel.username" placeholder="输入姓名">
+              <i v-if="$store.state.postname == 'truename'" slot="suffix" class="el-icon-success"></i>
+              <i v-else slot="suffix" class="el-icon-success" style="color:#67C23A;"></i>
+            </el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
-            <el-input v-model="formModel.password" placeholder="输入密码" type="password" show-password></el-input>
+            <el-input v-model="formModel.password" placeholder="输入密码" type="password" show-password>
+              <i v-if="$store.state.postpass" slot="suffix" class="el-icon-success"></i>
+              <i v-else slot="suffix" class="el-icon-success" style="color:#67C23A;"></i>
+            </el-input>
           </el-form-item>
           <el-form-item label="确认密码" prop="passwordcheck">
             <el-input
@@ -15,19 +21,22 @@
               placeholder="再次确认"
               type="password"
               show-password
-            ></el-input>
+            >
+              <i v-if="$store.state.postpasscheck" slot="suffix" class="el-icon-success"></i>
+              <i v-else slot="suffix" class="el-icon-success" style="color:#67C23A;"></i>
+            </el-input>
           </el-form-item>
-          <!-- <el-form-item label="密码" prop="password">
-            <el-input v-model="formModel.password" placeholder="输入姓名"></el-input>
+          <el-form-item label="邮箱" prop="useremail" @input.native="postemail">
+            <el-input v-model="formModel.useremail" placeholder="输入邮箱">
+              <i v-if="$store.state.postemail == 'trueemail'" slot="suffix" class="el-icon-success"></i>
+              <i v-else slot="suffix" class="el-icon-success" style="color:#67C23A;"></i>
+            </el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="passwordcheck">
-            <el-input v-model="formModel.passwordcheck" placeholder="输入姓名"></el-input>
-          </el-form-item>-->
-          <el-form-item label="邮箱" prop="useremail">
-            <el-input v-model="formModel.useremail" placeholder="输入邮箱"></el-input>
-          </el-form-item>
-          <el-form-item label="手机号" prop="usertel">
-            <el-input v-model="formModel.usertel" placeholder="输入手机号"></el-input>
+          <el-form-item label="手机号" prop="usertel" @input.native="posttel">
+            <el-input v-model="formModel.usertel" placeholder="输入手机号">
+              <i v-if="$store.state.posttel == 'truetel'" slot="suffix" class="el-icon-success"></i>
+              <i v-else slot="suffix" class="el-icon-success" style="color:#67C23A;"></i>
+            </el-input>
           </el-form-item>
           <el-form-item prop="idcode">
             <el-button type="primary" style="width:40%;" @click="getidcode" plain>获取验证码</el-button>
@@ -144,9 +153,50 @@ export default {
     };
   },
   methods: {
-    change: function(e, index) {
-      // console.log(e.target.value);
-      // console.log(index);
+    postall(value, index) {
+      switch (index) {
+        case 0:
+          var data = { username: value };
+          var url = "http://192.168.43.6:8088/usercontroller/usernameisexsit";
+          break;
+        case 3:
+          var data = { useremail: value };
+          var url = "http://192.168.43.6:8088/usercontroller/useremailisexsit";
+          break;
+        case 4:
+          var data = { usertel: value };
+          var url = "http://192.168.43.6:8088/usercontroller/usertelisexsit";
+          break;
+        default:
+          console.log("error");
+          break;
+      }
+      this.axios
+        .post(url, qs.stringify(data), {
+          header: { "Content-Type": "application/x-www-form-urlencoded" }
+        })
+        .then(res => {
+          console.log(value);
+          console.log(res.data);
+          this.$store.commit("postnamemodify", res.data);
+          this.$store.commit("postemailmodify", res.data);
+          this.$store.commit("posttelmodify", res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    postname(e) {
+      this.postall(e.target.value, 0);
+      console.log(e.target.form[0]);
+    },
+    postemail(e) {
+      this.postall(e.target.value, 3);
+      console.log(e.target.form[3]);
+    },
+    posttel(e) {
+      this.postall(e.target.value, 4);
+      console.log(e.target.form[4]);
     },
     getidcode() {
       console.log(this.formModel.usertel);

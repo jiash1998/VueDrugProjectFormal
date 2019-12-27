@@ -9,7 +9,14 @@ export default new Vuex.Store({
     sourcenameA: false,
     sourcenameB: false,
     sourcenameC: false,
-    getusername: "123",
+    postname: "truename",
+    postpass: true,
+    postpasscheck: true,
+    postemail: "trueemail",
+    standrdemail: "^w{6,}@[a-z0-9]{2,3}.[a-z]+$|,$",
+    posttel: "truetel",
+    posttidcode: true,
+    getusername: "1",
     purchaseDrugInfo: {}
   },
   getters: {},
@@ -46,6 +53,40 @@ export default new Vuex.Store({
     },
     sourcenameRstroeC(state) {
       return (state.sourcenameC = false);
+    },
+    postnamemodify(state, payload) {
+      state.postname = payload;
+      if (
+        state.postname == "truename" ||
+        state.postname.indexOf("email") != -1 ||
+        state.postname.indexOf("tel") != -1
+      ) {
+        return (state.postname = "truename");
+      }
+      return (state.postname = "falsename");
+    },
+    postemailmodify(state, payload) {
+      state.postemail = payload;
+      // console.log(state.standrdemail.test(state.postemail));
+      if (
+        state.postemail == "trueemail" ||
+        state.postemail.indexOf("name") != -1 ||
+        state.postemail.indexOf("tel") != -1
+      ) {
+        return (state.postemail = "trueemail");
+      }
+      return (state.postemail = "falseemail");
+    },
+    posttelmodify(state, payload) {
+      state.posttel = payload;
+      if (
+        state.posttel == "truetel" ||
+        state.posttel.indexOf("email") != -1 ||
+        state.posttel.indexOf("name") != -1
+      ) {
+        return (state.posttel = "truetel");
+      }
+      return (state.posttel = "falsetel");
     }
   },
   actions: {},

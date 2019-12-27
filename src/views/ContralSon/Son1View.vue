@@ -33,10 +33,6 @@ export default {
     axiosGet: function() {
       this.axios
         .get("http://192.168.43.6:8088/drugController/selectAllDrug")
-        // , {
-        //   retry: 5,
-        //   retryDelay: 1000
-        // }
         // .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
         .then(res => {
           console.log(res.data);

@@ -5,8 +5,17 @@
         <el-form-item label="批准文号" prop="drugId">
           <el-input v-model="InfoForm.drugId" placeholder="输入批准文号"></el-input>
         </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="drugselect" plain>查询</el-button>
+          <el-button type="primary" native-type="reset" plain>清空信息</el-button>
+          <el-button
+            type="primary"
+            @click="submit('InfoForm')"
+            v-loading.fullscreen.lock="loading"
+          >提交修改</el-button>
+        </el-form-item>
         <el-form-item label="药品名称">
-          <el-input v-model="InfoForm.drugName"></el-input>
+          <el-input v-model="InfoForm.drugName" disabled></el-input>
         </el-form-item>
         <el-form-item label="药品库存">
           <el-input v-model="InfoForm.drugNum"></el-input>
@@ -16,21 +25,12 @@
         </el-form-item>
         <!-- <el-form-item label="药品规格">
           <el-input v-model="InfoForm.drugSpe" disabled></el-input>
-        </el-form-item> -->
+        </el-form-item>-->
         <el-form-item label="生产日期">
           <el-input v-model="InfoForm.drugProduct" disabled></el-input>
         </el-form-item>
         <el-form-item label="保质期">
           <el-input v-model="InfoForm.drugShelflife" disabled></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="drugselect" plain>查询</el-button>
-          <el-button type="primary" native-type="reset" plain>清空信息</el-button>
-          <el-button
-            type="primary"
-            @click="submit('InfoForm')"
-            v-loading.fullscreen.lock="loading"
-          >提交修改</el-button>
         </el-form-item>
       </el-form>
     </div>
