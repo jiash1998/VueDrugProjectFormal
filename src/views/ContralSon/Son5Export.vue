@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import qs from "querystring";
 export default {
   name: "son1View",
   data() {
@@ -40,6 +41,21 @@ export default {
           console.log(err);
         });
     },
+    toLMK(value) {
+      var url = "";
+      this.axios
+        .post(url, qs.stringify(value), {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     export2Excel() {
       this.axios
         .get("http://192.168.43.6:8088/drugController/selectAllDrug")
@@ -47,6 +63,7 @@ export default {
         .then(res => {
           // var self = this;
           // self.getDrug = res.data;
+          this.toLMK(data);
           require.ensure([], () => {
             const {
               export_json_to_excel

@@ -9,7 +9,7 @@
         <el-button type="primary" size="small" plain>
           <router-link to="/userReg" tag="span">注 册</router-link>
         </el-button>
-        <el-button type="primary" size="small" :disabled="this.btnstate != -1 ? false : true" plain>
+        <el-button type="primary" size="small" :disabled="$store.state.btnstate == -1 ? true : false" plain>
           <router-link to="/contral" tag="span">控 制</router-link>
         </el-button>
       </div>
@@ -56,7 +56,7 @@ export default {
   },
   data() {
     return {
-      btnstate: -1
+      // btnstate: -1
     };
   }
 };

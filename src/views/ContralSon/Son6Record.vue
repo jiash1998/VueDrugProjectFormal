@@ -1,8 +1,13 @@
 <template>
   <div>
     <div id="main">
-      <el-button type="primary" plain @click="botTest">刷新记录</el-button>
-      <div>{{listInfo}}</div>
+      <el-button type="primary" plain @click="getInfo" style="margin:20px 0 0 10%;">刷新记录</el-button>
+      <div id="infoDiv">
+        <div id="infoDivSon" v-for="(item,index) in listInfo" :key="index">
+          <p>{{item.hisopname}}{{item.hisopdata}}{{item.hisopcontent}}</p>
+          <p>{{item.hisopconcrete}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -16,13 +21,15 @@ export default {
   },
   data() {
     return {
-      listInfo:[]
-    }
+      listInfo: []
+    };
   },
-  mounted() {},
+  mounted() {
+    this.getInfo();
+  },
   methods: {
-    botTest: function() {
-      console.log(this.$store.state.getusername);
+    getInfo: function() {
+      // console.log(this.$store.state.getusername);
       var data = { hisopname: this.$store.state.getusername };
       this.axios
         .post(
@@ -47,4 +54,18 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#infoDiv {
+  width: 80%;
+  height: 610px;
+  margin: 20px 10% 0 10%;
+  overflow: auto;
+
+  #infoDivSon {
+    border: 1px solid #409eff;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #2f495e;
+    padding-left: 2%;
+  }
+}
 </style>

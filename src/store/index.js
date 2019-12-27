@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     active: 1,
+    btnstate:-1,
     sourcenameA: false,
     sourcenameB: false,
     sourcenameC: false,
@@ -16,7 +17,7 @@ export default new Vuex.Store({
     standrdemail: "^w{6,}@[a-z0-9]{2,3}.[a-z]+$|,$",
     posttel: "truetel",
     posttidcode: true,
-    getusername: "1",
+    getusername: "",
     purchaseDrugInfo: {}
   },
   getters: {},
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     activeReduce(state) {
       state.active > 1 ? state.active-- : state.active;
       return state.active;
+    },
+    modifybtnstate(state){
+      return state.btnstate = 1;
     },
     userNameSet(state, payload) {
       return (state.getusername = payload);
@@ -67,7 +71,6 @@ export default new Vuex.Store({
     },
     postemailmodify(state, payload) {
       state.postemail = payload;
-      // console.log(state.standrdemail.test(state.postemail));
       if (
         state.postemail == "trueemail" ||
         state.postemail.indexOf("name") != -1 ||
