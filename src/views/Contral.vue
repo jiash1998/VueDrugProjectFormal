@@ -35,9 +35,14 @@
           </el-menu-item>
           <el-menu-item index="6">
             <i class="el-icon-view"></i>
-            <router-link to="/contral/Son6record" tag="span">
+            <router-link to="/contral/son6record" tag="span">
               <span>记录跟踪</span>
-              <!-- // -->
+            </router-link>
+          </el-menu-item>
+          <el-menu-item index="7">
+            <i class="el-icon-user"></i>
+            <router-link to="/contral/son7feedback" tag="span">
+              <span>在线客服</span>
             </router-link>
           </el-menu-item>
         </el-menu>
