@@ -6,7 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     active: 1,
-    btnstate:-1,
+    // beforeenter: "?",
+    // enter: "contral/son1view",
+    btnstate: -1,
     sourcenameA: false,
     sourcenameB: false,
     sourcenameC: false,
@@ -28,8 +30,8 @@ export default new Vuex.Store({
       state.active > 1 ? state.active-- : state.active;
       return state.active;
     },
-    modifybtnstate(state){
-      return state.btnstate = 1;
+    modifybtnstate(state) {
+      return (state.btnstate = 1);
     },
     userNameSet(state, payload) {
       return (state.getusername = payload);
@@ -57,8 +59,11 @@ export default new Vuex.Store({
     sourcenameRstroeC(state) {
       return (state.sourcenameC = false);
     },
-    postmessmodify(state,payload){
+    postmessmodify(state, payload) {
       return (state.postpass = payload);
+    },
+    postmesscheckmodify(state, payload) {
+      return (state.postpasscheck = payload);
     },
     postnamemodify(state, payload) {
       state.postname = payload;

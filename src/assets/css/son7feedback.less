@@ -2,7 +2,7 @@
   width: 90%;
   height: 680px;
   margin: 15px 5% 0 5%;
-  //   background-color: pink;
+  // background-color: pink;
 
   .el-tag {
     width: 100%;
@@ -19,21 +19,59 @@
     border-radius: 5px;
     border: 1px solid #409eff;
     overflow: auto;
-
+    position: relative;
+    display: flex;
+    justify-content: flex-start !important;
     #chatborder_son {
+      height: 55px;
+      width: 100%;
+      background-color: aquamarine;
       #avatar {
-        #avatarImg {
+        #avatarImg1 {
           width: 40px;
+          margin: 10px;
+          float: left;
+        }
+
+        #avatarImg2 {
+          width: 40px;
+          margin: 10px;
+          float: right;
+        }
+      }
+
+      #mess {
+        #messSpan1 {
+          animation: toLeft 1.5s ease both;
+          float: left;
+          width: auto;
+          height: 20px;
+          margin-top: 1.5%;
+          padding: 5px;
+          border-radius: 5px;
+          background-color: #ecf5ff;
+          color: #2f495e;
+        }
+
+        #messSpan2 {
+          animation: toRight 1.5s ease both;
+          float: right;
+          width: auto;
+          height: 20px;
+          margin-top: 1.5%;
+          padding: 5px;
+          border-radius: 5px;
+          background-color: #ecf5ff;
+          color: #2f495e;
         }
       }
     }
   }
-
   #postmess {
     width: 100%;
-    // height: 60px;
+    height: 80px;
     box-sizing: border-box;
-    // background-color: #fafafa;
+    // background-color: red;
     // border: 1px solid #409eff;
 
     .el-input {
@@ -45,5 +83,26 @@
       width: 10%;
       margin-top: 10px;
     }
+  }
+}
+@keyframes toLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes toRight {
+  0% {
+    opacity: 0;
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-10px);
   }
 }

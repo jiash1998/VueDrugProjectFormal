@@ -87,6 +87,7 @@ export default {
     var validatePass = (rule, value, callback) => {
       const standrd = /^[a-zA-Z][0-9]{5,14}$/;
       if (!value) {
+        this.$store.commit("postmessmodify", true);
         return new callback("密码为空");
       } else if (!standrd.test(value)) {
         this.$store.commit("postmessmodify", true);
@@ -99,32 +100,43 @@ export default {
       }
     };
     var validatePassCheck = (rule, value, callback) => {
+      const standrd = /^[a-zA-Z][0-9]{5,14}$/;
       if (!value) {
+        this.$store.commit("postmesscheckmodify", true);
         return new callback("密码为空");
       } else if (value !== this.formModel.password) {
+        this.$store.commit("postmesscheckmodify", true);
         callback(new Error("密码不一致"));
+      } else if (!standrd.test(value)) {
+        this.$store.commit("postmesscheckmodify", true);
       } else {
+        this.$store.commit("postmesscheckmodify", false);
         callback();
       }
     };
     var validateEmailCheck = (rule, value, callback) => {
-      const standrd = /^\w{6,}@[a-z0-9]{2,3}\.[a-z]+$|\,$/;
+      const standrd = /^\w{6,}@[a-z0-9]{2,3}\.com+$|\,$/;
       if (!value) {
+        this.$store.commit("postemailmodify", "trueemail");
         return new callback("邮箱为空");
-      }
-      if (!standrd.test(value)) {
+      } else if (!standrd.test(value)) {
+        this.$store.commit("postemailmodify", "trueemail");
         callback(new Error("邮箱格式错误"));
       } else {
+        this.$store.commit("postemailmodify", "falseemail");
         callback();
       }
     };
     var validatePhoneCheck = (rule, value, callback) => {
       const standrd = /^1[0-9]{10}$/;
       if (!value) {
+        this.$store.commit("posttelmodify", "truetel");
         return new callback("手机号为空");
       } else if (!standrd.test(value)) {
+        this.$store.commit("posttellmodify", "truetel");
         callback(new Error("手机格式错误"));
       } else {
+        this.$store.commit("posttelmodify", "falsetel");
         callback();
       }
     };

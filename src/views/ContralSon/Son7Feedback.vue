@@ -2,13 +2,39 @@
   <div id="feedback">
     <div id="main">
       <el-tag type="primary" effect="dark">客服</el-tag>
-      <div id="chatborder">
-        <div id="chatborder_son">
+      <div id="chatborder" ref="chatborder">
+        <!-- <div id="chatborder_son" v-for="(item,index) in getMessage" :key="index"> -->
+        <!-- <div id="chatborder_son">
           <div id="avatar">
-            <img src="../../assets/img/feedbackpost.png" id="avatarImg" />
+            <img src="../../assets/img/feedbackpost.png" id="avatarImg1" />
+          </div>
+        <div id="mess">-->
+        <!-- <span id="messSpan1" style>{{item.data}}</span> -->
+        <!-- <span id="messSpan1" style>{{this.getMessage}}</span>
+        </div>-->
+        <!-- </div> 
+        <div id="chatborder_son" style>
+          <div id="avatar">
+            <img src="../../assets/img/feedbackget.png" id="avatarImg2" />
           </div>
           <div id="mess">
-            <span></span>
+            <span id="messSpan2" style>{{this.postMessage}}</span>
+          </div>
+        </div>-->
+        <div
+          v-for="(i,index) in list"
+          :key="index"
+          class="msg"
+          :style="i.userId == userId?'flex-direction:row-reverse':''"
+        >
+          <div class="user-head">
+            <img :src="i.avatar" height="30" width="30" :title="i.username" />
+          </div>
+          <div class="user-msg">
+            <span
+              :style="i.userId == userId?' float: right;':''"
+              :class="i.userId == userId?'right':'left'"
+            >{{i.content}}</span>
           </div>
         </div>
       </div>
@@ -30,6 +56,11 @@ export default {
   name: "feedback",
   data() {
     return {
+      list:[{
+        avatar:''
+      }],
+      getMessage: [],
+      postMessage: [],
       postform: {
         postmess: ""
       },
@@ -43,27 +74,53 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.initWebSocket();
+  },
   methods: {
     feedbackmess() {
-      var data = { postname: this.postform.postmess,
-      postmess:this.$store.state.getusername };
-      this.axios
-        .post(
-          "http://192.168.43.6:8088//",
-          qs.stringify(data),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            }
-          }
-        )
-        .then(res => {
-          console.log(res.data);
-          this.listInfo = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      let _this = this;
+      console.log(_this.postform.postmess);
+      _this.postMessage = _this.postform.postmess;
+      var data = {
+        postname: _this.$store.state.getusername,
+        postmess: _this.postform.postmess
+      };
+      _this.ws.send(JSON.stringify(data)); //调用WebSocket send()发送信息的方法
+      _this.postform.postmess = "";
+      // setTimeout(() => {
+      //   _this.scrollBottm();
+      // }, 500);
+    },
+    // 进入页面创建websocket连接
+    initWebSocket() {
+      let _this = this;
+      // 判断页面有没有存在websocket连接
+      if (window.WebSocket) {
+        var serverHot = "192.168.43.6:8088";
+        var url = "ws://192.168.43.6:8088/hello";
+        let ws = new WebSocket(url);
+        _this.ws = ws;
+        ws.onopen = function(e) {
+          console.log("服务器连接成功: " + url);
+        };
+        // ws.onclose = function(e) {
+        //   console.log("服务器连接关闭: " + url);
+        // };
+        ws.onerror = function() {
+          console.log("服务器连接出错: " + url);
+        };
+        ws.onmessage = function(e) {
+          //接收服务器返回的数据
+          console.log(e);
+          // _this.getMessage = e.data;
+        };
+      }
+    },
+    // 滚动条到底部
+    scrollBottm() {
+      let el = this.$refs["chatborder"];
+      el.scrollTop = el.scrollHeight;
     }
   }
 };
