@@ -14,7 +14,6 @@ export default new Vuex.Store({
     postpass: true,
     postpasscheck: true,
     postemail: "trueemail",
-    standrdemail: "^w{6,}@[a-z0-9]{2,3}.[a-z]+$|,$",
     posttel: "truetel",
     posttidcode: true,
     getusername: "",
@@ -57,6 +56,9 @@ export default new Vuex.Store({
     },
     sourcenameRstroeC(state) {
       return (state.sourcenameC = false);
+    },
+    postmessmodify(state,payload){
+      return (state.postpass = payload);
     },
     postnamemodify(state, payload) {
       state.postname = payload;

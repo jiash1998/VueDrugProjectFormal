@@ -85,11 +85,16 @@ export default {
       }
     };
     var validatePass = (rule, value, callback) => {
+      const standrd = /^[a-zA-Z][0-9]{5,14}$/;
       if (!value) {
         return new callback("密码为空");
+      } else if (!standrd.test(value)) {
+        this.$store.commit("postmessmodify", true);
+        return new callback("密码以字母开头,长度在6-15位,只能包含字母和数字");
       } else if (this.formModel.passwordcheck !== "") {
         this.$refs.formModel.validateField("passwordcheck");
       } else {
+        this.$store.commit("postmessmodify", false);
         callback();
       }
     };
@@ -136,8 +141,8 @@ export default {
     return {
       rules: {
         username: [{ validator: validateName, trigger: "blur" }],
-        password: [{ validator: validateName, trigger: "blur" }],
-        passwordcheck: [{ validator: validateName, trigger: "blur" }],
+        password: [{ validator: validatePass, trigger: "blur" }],
+        passwordcheck: [{ validator: validatePassCheck, trigger: "blur" }],
         useremail: [{ validator: validateEmailCheck, trigger: "blur" }],
         usertel: [{ validator: validatePhoneCheck, trigger: "blur" }],
         idcode: [{ validator: validateCodeCheck, trigger: "blur" }]
