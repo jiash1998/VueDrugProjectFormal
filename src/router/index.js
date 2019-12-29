@@ -41,12 +41,16 @@ const routes = [
     path: "/contral",
     name: "contral",
     component: Contral,
-    // beforeEnter: (to, from, next) => {
-    //   var sign = this.$store.state.btnstate;
-    //   if(sign != -1 ){
-    //     next();
-    //   }
-    // },
+    meta:{
+      requireAuth:true
+    },
+    beforeEnter: (to, from, next) => {
+      if(to.meta.requireAuth){
+        to("/signin")
+      }else{
+        next();
+      }
+    },
     children: [
       {
         path: "",

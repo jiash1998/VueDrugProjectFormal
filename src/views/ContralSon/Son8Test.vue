@@ -4,14 +4,14 @@
     <div id="main">
       <div class="msg-box">
         <!-- <div class="msg" style="flex-direction: row-reverse"> -->
-        <!-- <div class="msg" v-for="(item,index) in list" :key="index"> -->
-        <div class="msg">
+        <div class="msg" v-for="(item,index) in list" :key="index">
+          <!-- <div class="msg"> -->
           <div class="user-head">
             <img src="../../assets/img/feedbackget.png" />
           </div>
           <div class="user-msg">
-            <span class="left">12323</span>
-            <!-- <span class="left">{{item.data}}</span> -->
+            <!-- <span class="left">12323</span> -->
+            <span class="left">{{item.mess}}</span>
             <!-- <span class="right" style="float:right;">12313212312</span> -->
           </div>
         </div>
@@ -19,7 +19,7 @@
       <div id="postmess">
         <el-form :model="postform">
           <el-form-item label>
-            <el-input v-model="postform.postmess" placeholder="输入消息"></el-input>
+            <el-input v-model="postform.postmess" @keyup.enter="postMess" placeholder="输入消息"></el-input>
             <el-button type="primary" @click="postMess" plain>发送</el-button>
           </el-form-item>
         </el-form>
@@ -34,7 +34,10 @@ export default {
   data() {
     return {
       postform: { postmess: "" },
-      list: []
+      name: "",
+      mess: "",
+      list: [],
+      contentText:''
     };
   },
   mounted() {
@@ -44,7 +47,7 @@ export default {
     postMess() {
       let _this = this;
       console.log(_this.postform.postmess);
-      _this.postMessage = _this.postform.postmess;
+      // _this.list = [_this.list,_this.postform.postmess];
       var data = {
         postname: _this.$store.state.getusername,
         postmess: _this.postform.postmess
@@ -73,12 +76,18 @@ export default {
         };
         ws.onmessage = function(e) {
           //接收服务器返回的数据
-        // var self
-        //   _this.list = e.data;
-        console.log(_this.postform.postmess);
-          _this.list = [_this.postform.postmess,e.data];
-          console.log("接收后台"+e.data);
-          console.log("聊天记录："+_this.list);
+          // var self
+          //   _this.list = e.data;
+          // console.log(_this.postform.postmess);
+          let getData = JSON.parse(e.data);
+          var message = JSON.parse(getData).postmess;
+          console.log("消息"+message);
+          _this.list = [..._this.list,{mess: message}];
+          console.log("接收后台" + getData);
+          // console.log(JSON.parse(getData).postname);
+          // console.log(JSON.parse(getData).postmess);
+          console.log(_this.list);
+          console.log("聊天记录：" + _this.list.mess);
         };
       }
     }
