@@ -42,7 +42,7 @@ export default {
           }
         )
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           this.listInfo = res.data;
         })
         .catch(err => {

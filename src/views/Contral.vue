@@ -45,6 +45,12 @@
               <span>在线客服</span>
             </router-link>
           </el-menu-item>
+          <el-menu-item index="8">
+            <i class="el-icon-user"></i>
+            <router-link to="/contral/son8test" tag="span">
+              <span>测试界面</span>
+            </router-link>
+          </el-menu-item>
         </el-menu>
       </div>
       <div id="main_right">

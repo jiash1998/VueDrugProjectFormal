@@ -3,38 +3,21 @@
     <div id="main">
       <el-tag type="primary" effect="dark">客服</el-tag>
       <div id="chatborder" ref="chatborder">
-        <!-- <div id="chatborder_son" v-for="(item,index) in getMessage" :key="index"> -->
-        <!-- <div id="chatborder_son">
+        <div id="chatborder_son">
           <div id="avatar">
             <img src="../../assets/img/feedbackpost.png" id="avatarImg1" />
           </div>
-        <div id="mess">-->
-        <!-- <span id="messSpan1" style>{{item.data}}</span> -->
-        <!-- <span id="messSpan1" style>{{this.getMessage}}</span>
-        </div>-->
-        <!-- </div> 
+          <div id="mess">
+            <!-- <span id="messSpan1" style>{{item.data}}</span> -->
+            <span id="messSpan1" style>{{this.getMessage}}</span>
+          </div>
+        </div>
         <div id="chatborder_son" style>
           <div id="avatar">
             <img src="../../assets/img/feedbackget.png" id="avatarImg2" />
           </div>
           <div id="mess">
             <span id="messSpan2" style>{{this.postMessage}}</span>
-          </div>
-        </div>-->
-        <div
-          v-for="(i,index) in list"
-          :key="index"
-          class="msg"
-          :style="i.userId == userId?'flex-direction:row-reverse':''"
-        >
-          <div class="user-head">
-            <img :src="i.avatar" height="30" width="30" :title="i.username" />
-          </div>
-          <div class="user-msg">
-            <span
-              :style="i.userId == userId?' float: right;':''"
-              :class="i.userId == userId?'right':'left'"
-            >{{i.content}}</span>
           </div>
         </div>
       </div>
@@ -56,9 +39,11 @@ export default {
   name: "feedback",
   data() {
     return {
-      list:[{
-        avatar:''
-      }],
+      list: [
+        {
+          avatar: ""
+        }
+      ],
       getMessage: [],
       postMessage: [],
       postform: {
@@ -98,11 +83,15 @@ export default {
       // 判断页面有没有存在websocket连接
       if (window.WebSocket) {
         var serverHot = "192.168.43.6:8088";
-        var url = "ws://192.168.43.6:8088/hello";
+        var url = "ws://192.168.43.6:8088/hello/postname=" + _this.$store.state.getusername;
         let ws = new WebSocket(url);
         _this.ws = ws;
         ws.onopen = function(e) {
           console.log("服务器连接成功: " + url);
+          var data = {
+            postname: _this.$store.state.getusername
+          };
+          _this.ws.send(JSON.stringify(data)); //调用WebSocket send()发送信息的方法
         };
         // ws.onclose = function(e) {
         //   console.log("服务器连接关闭: " + url);
@@ -113,7 +102,7 @@ export default {
         ws.onmessage = function(e) {
           //接收服务器返回的数据
           console.log(e);
-          // _this.getMessage = e.data;
+          _this.getMessage = e.data;
         };
       }
     },
