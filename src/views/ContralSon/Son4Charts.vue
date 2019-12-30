@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     drawLine(res) {
-      // var self = this;
+      //设置两个数组存放饼图和信息数据
       var legendDrugName = [];
       var seriesDrugName = [];
       this.axios
@@ -43,6 +43,7 @@ export default {
           // myChart.showLoading();
           myChart.setOption({
             title: { text: "药品库存" },
+            //饼图每一块的详细信息
             tooltip: {
               trigger: "item",
               formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -54,6 +55,7 @@ export default {
               top: 130,
               bottom: 20,
               data: legendDrugName,
+              //选择哪些药品首先不展示
               selected: {
                 诺氟沙星胶囊: false,
                 氨苄西林胶囊: false,
@@ -69,13 +71,14 @@ export default {
               {
                 name: "药品",
                 type: "pie",
+                //位置
                 center:['45%','50%'],
                 radius: "65%",
                 // ].sort(function(a, b) {
                 //   return a.value - b.value;
                 // }),
                 data: seriesDrugName,
-                roseType: "radius"
+                roseType: "radius"//饼图根据数据呈现玫瑰图
               }
             ]
           });

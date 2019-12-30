@@ -68,6 +68,7 @@ export default {
             const {
               export_json_to_excel
             } = require("../../excel/Export2Excel");
+            //設置表格头
             const tHeader = [
               "姓名",
               "批准文号",
@@ -85,7 +86,7 @@ export default {
               "drugSpe",
               "drugProduct",
               "drugShelflife"
-            ]; // 上面的index、phone_Num、school_Name是tableData里对象的属性
+            ]; // 设置tableData里对象的属性
             var tableData = [];
             for (let i = 0; i < res.data.length; i++) {
               tableData.push({

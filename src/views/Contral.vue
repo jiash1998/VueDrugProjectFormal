@@ -82,7 +82,7 @@ export default {
     goBackListener: function() {
       var that = this; //window.onpopstate默认指向window,这里改变this指向
       window.onpopstate = function() {
-        that.$store.commit("activeReduce");
+        that.$store.commit("activeReduce");//点击页面回退按钮。购买步骤条也减一
       };
     }
   }

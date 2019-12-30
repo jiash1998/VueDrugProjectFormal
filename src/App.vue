@@ -64,37 +64,7 @@ export default {
       // btnstate: -1
     };
   },
-  mounted() {
-    // this.initWebSocket();
-  },
-  methods: {
-    initWebSocket() {
-      let _this = this;
-      // 判断页面有没有存在websocket连接
-      if (window.WebSocket) {
-        // var serverHot = window.location.hostname;
-        var serverHot = "192.168.43.6:8088";
-        var url = "ws://192.168.43.6:8088/hello";
-        let ws = new WebSocket(url);
-        _this.ws = ws;
-        ws.onopen = function(e) {
-          console.log("服务器连接成功: " + url);
-        };
-        // ws.onclose = function(e) {
-        //   console.log("服务器连接关闭: " + url);
-        // };
-        ws.onerror = function() {
-          console.log("服务器连接出错: " + url);
-        };
-        ws.onmessage = function(e) {
-          //接收服务器返回的数据
-          let resData = JSON.parse(e.data);
-          // _this.count = resData.count;
-          console.log(resData);
-        };
-      }
-    }
-  }
+   
 };
 </script>
 <style lang="less">

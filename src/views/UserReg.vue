@@ -170,6 +170,7 @@ export default {
     };
   },
   methods: {
+    //实时根据后台数据判断注册信息是否通过
     postall(value, index) {
       switch (index) {
         case 0:
@@ -193,6 +194,7 @@ export default {
           header: { "Content-Type": "application/x-www-form-urlencoded" }
         })
         .then(res => {
+          //提交给store判断
           console.log(value);
           console.log(res.data);
           this.$store.commit("postnamemodify", res.data);
@@ -232,6 +234,7 @@ export default {
           console.log("telephone success");
         });
     },
+    //判断整个注册表是否能通过
     submitCheck(formName) {
       console.log("enter");
       this.$refs[formName].validate(val => {

@@ -76,16 +76,20 @@ export default {
   },
   mounted() {
     console.log(this.$store.state.purchaseDrugInfo.data);
+    //拿到上一个界面的药品信息
     var drugData = this.$store.state.purchaseDrugInfo.data;
+    //把查到药品的进货商存放进数组
     for (let index = 0; index < drugData.length; index++) {
       this.sourceInfo[index] = drugData[index].sourcename;
     }
     console.log(this.sourceInfo);
+    //根据拿到的进货商数据，修改可以点击的按钮
     for (let index = 0; index < this.sourceInfo.length; index++) {
       this.$store.commit("sourcenameModify", this.sourceInfo[index]);
     }
   },
   methods: {
+    //从后台数据得知药品有哪几个进货商，并展示
     groupChange(value) {
       this.radioValue = value;
       var drugData = this.$store.state.purchaseDrugInfo.data;
@@ -101,6 +105,7 @@ export default {
       }
       console.log(drugData.length);
     },
+    //告诉后台选择了哪个进货商
     submit(formName) {
       console.log(this.radioValue);
       console.log(this.facotryForm);

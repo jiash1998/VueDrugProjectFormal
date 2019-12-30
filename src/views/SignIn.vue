@@ -67,11 +67,13 @@ export default {
   methods: {
     submit: function(formName) {
       console.log(this.form);
+      //使用validate进行校验
       this.$refs[formName].validate(val => {
         console.log("enter");
         if (val) {
           var data = this.form;
           console.log(data);
+          //axios连接，设置连接头，并使用qs
           this.axios
             .post(
               "http://192.168.43.6:8088/usercontroller/selectalluserinfo",

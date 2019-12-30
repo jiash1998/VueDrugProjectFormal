@@ -5,20 +5,22 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    active: 1,
-    // beforeenter: "?",
-    // enter: "contral/son1view",
+    active: 1,//控制购买步骤条
     btnstate: -1,
+    //购买界面根据进货商的药品库存来决定是否显示有药品
     sourcenameA: false,
     sourcenameB: false,
     sourcenameC: false,
+    //注册表单，判定是否通过的标记
     postname: "truename",
     postpass: true,
     postpasscheck: true,
     postemail: "trueemail",
     posttel: "truetel",
     posttidcode: true,
+    //传给后台，登录管理员的姓名
     getusername: "",
+    //购买界面，存放查询到的药品信息
     purchaseDrugInfo: {}
   },
   getters: {},

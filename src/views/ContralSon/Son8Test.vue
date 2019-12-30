@@ -47,7 +47,6 @@ export default {
     postMess() {
       let _this = this;
       console.log(_this.postform.postmess);
-      // _this.list = [_this.list,_this.postform.postmess];
       var data = {
         postname: _this.$store.state.getusername,
         postmess: _this.postform.postmess
@@ -57,6 +56,7 @@ export default {
     },
     initWs() {
       let _this = this;
+      //判断是否支持websocket，并连接
       if (window.WebSocket) {
         var serverHot = "192.168.43.6:8088";
         var url =
@@ -64,6 +64,7 @@ export default {
           _this.$store.state.getusername;
         let ws = new WebSocket(url);
         _this.ws = ws;
+        //发送连接
         ws.onopen = function(e) {
           console.log("服务器连接成功: " + url);
           var data = {
@@ -76,10 +77,9 @@ export default {
         };
         ws.onmessage = function(e) {
           //接收服务器返回的数据
-          // var self
-          //   _this.list = e.data;
-          // console.log(_this.postform.postmess);
           let getData = JSON.parse(e.data);
+          //需要将获得json字符串两次转换
+          var name = JSON.parse(getData).postname;
           var message = JSON.parse(getData).postmess;
           console.log("消息"+message);
           _this.list = [..._this.list,{mess: message}];
