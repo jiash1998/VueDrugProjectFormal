@@ -1,0 +1,110 @@
+#main {
+  height: 620px;
+  width: 90%;
+  // background-color: pink;
+  margin: 10px 5% 0 5%;
+
+  .el-tag {
+    width: 100%;
+    height: 50px;
+    font-size: 15px;
+    line-height: 50px;
+    text-align: center;
+  }
+
+  .msg-box {
+    // position: absolute;
+    height: 80%;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 3rem;
+    overflow-y: auto;
+    border-radius: 5px;
+    border: 1px solid #409eff;
+    background-color: #ecf5ff;
+    .msg {
+      width: 95%;
+      min-height: 2.5rem;
+      margin: 1rem 0.5rem;
+      position: relative;
+      display: flex;
+      justify-content: flex-start !important;
+      .user-head {
+        min-width: 2.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background: #f1f1f1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .user-msg {
+        width: auto;
+        word-break: break-all; //设置文本如何换行
+        position: relative;
+        border-radius: 0.5rem;
+        z-index: 5;
+        background-color: #ecf5ff;
+        span {
+          display: inline-block;
+          padding: 0.5rem 0.7rem;
+          border-radius: 0.5rem;
+          margin-top: 0.2rem;
+          font-size: 0.88rem;
+          color: #2f495e;
+        }
+        .left {
+          background: white;
+          animation: toLeft 0.5s ease both 1;
+        }
+        .right {
+          background: white;
+          animation: toright 0.5s ease both 1;
+        }
+        @keyframes toLeft {
+          0% {
+            opacity: 0;
+            transform: translateX(-10px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0px);
+          }
+        }
+        @keyframes toright {
+          0% {
+            opacity: 0;
+            transform: translateX(10px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0px);
+          }
+        }
+      }
+    }
+  }
+
+  #postmess {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    // position:absolute;
+    justify-content: center;
+    // align-items: center;
+    box-sizing: border-box;
+    flex-direction: column;
+
+    .el-input {
+      // display: inline-block;
+      width: 90%;
+      margin-top: 10px;
+    }
+
+    .el-button {
+      width: 10%;
+      margin-top: 10px;
+    }
+  }
+}

@@ -14,7 +14,7 @@ const Son4Charts = () => import("@/views/ContralSon/Son4Charts");
 const Son5Export = () => import("@/views/ContralSon/Son5Export");
 const Son6Record = () => import("@/views/ContralSon/Son6Record");
 const Son7Feedback = () => import("@/views/ContralSon/Son7Feedback");
-const Son8Test = () => import("@/views/ContralSon/Son8Test");
+const Son8Test = () => import("@/views/ContralSon/Son8Feedback");
 
 Vue.use(VueRouter);
 
