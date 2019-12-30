@@ -40,8 +40,11 @@ export default {
   },
   data() {
     var input1Validate = (rule, value, callback) => {
+      const standrd = /^1[0-9]{10}$/;
       if (!value) {
         return new callback("用户名为空");
+      }else if(!standrd.test(value) || value.length < 2){
+        return new callback("格式错误");
       } else {
         callback();
       }
@@ -85,14 +88,18 @@ export default {
               }
             )
             .then(res => {
-              alert("post success");
+              if (res.data == "") {
+                alert("post error");
+              } else {
+                alert("post success");
+                this.$router.replace("/contral");
+                this.$store.commit("modifybtnstate");
+                this.$store.commit("userNameSet", res.data.username);
+              }
               console.log(res);
-              this.$router.replace("/contral");
-              this.$store.commit("modifybtnstate");
-              this.$store.commit("userNameSet", res.data.username);
             })
             .catch(err => {
-              alert("post error");
+              alert("POST ERROR");
             });
         } else {
           alert("post error");
