@@ -15,6 +15,7 @@
           :disabled="$store.state.btnstate == -1 ? true : false"
           plain
         >
+          <!-- :disabled="$store.state.btnstate == -1 ? true : false" -->
           <router-link to="/contral" tag="span">控 制</router-link>
         </el-button>
       </div>
@@ -64,7 +65,9 @@ export default {
       // btnstate: -1
     };
   },
-   
+  mounted() {
+    console.log(this.$store.state.btnstate);
+  }
 };
 </script>
 <style lang="less">

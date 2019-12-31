@@ -50,9 +50,11 @@ export default {
       console.log(_this.postform.postmess);
       var data = {
         postname: _this.$store.state.getusername,
-        postmess: _this.postform.postmess
+        postmess: _this.postform.postmess,
+        postsign: _this.$store.state.socketsign
       };
       //保存多次聊天记录
+      console.log(data);
       _this.list = [..._this.list,{postname:data.postname,postmess:data.postmess}];
       _this.ws.send(JSON.stringify(data)); //调用WebSocket send()发送信息的方法
       _this.postform.postmess = "";
@@ -64,16 +66,18 @@ export default {
         var serverHot = "192.168.43.6:8088";
         var url =
           "ws://192.168.43.6:8088/hello/postname=" +
-          _this.$store.state.getusername;
+          _this.$store.state.getusername+"/postsign=客户端";
         let ws = new WebSocket(url);
         _this.ws = ws;
         //发送连接
         ws.onopen = function(e) {
           console.log("服务器连接成功: " + url);
           var data = {
-            postname: _this.$store.state.getusername
+            postname: _this.$store.state.getusername,
+            postsign: _this.$store.state.socketsign
           };
-          _this.ws.send(JSON.stringify(data)); //调用WebSocket send()发送信息的方法
+          //调用WebSocket send()发送信息的方法
+          _this.ws.send(JSON.stringify(data)); 
         };
         ws.onerror = function() {
           console.log("服务器连接出错: " + url);

@@ -18,6 +18,8 @@ export default new Vuex.Store({
     postemail: "trueemail",
     posttel: "truetel",
     posttidcode: true,
+    //聊天室标识
+    socketsign:'客户端',
     //传给后台，登录管理员的姓名
     getusername: "",
     //购买界面，存放查询到的药品信息

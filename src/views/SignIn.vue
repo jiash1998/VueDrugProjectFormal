@@ -43,9 +43,10 @@ export default {
       const standrd = /^1[0-9]{10}$/;
       if (!value) {
         return new callback("用户名为空");
-      }else if(!standrd.test(value) || value.length < 2){
-        return new callback("格式错误");
-      } else {
+      // }else if(!standrd.test(value) || value.length > 0){
+      //   return new callback("格式错误");
+      }
+       else {
         callback();
       }
     };
@@ -89,9 +90,9 @@ export default {
             )
             .then(res => {
               if (res.data == "") {
-                alert("post error");
+                alert("Login ERROR");
               } else {
-                alert("post success");
+                alert("Login SUCCESS");
                 this.$router.replace("/contral");
                 this.$store.commit("modifybtnstate");
                 this.$store.commit("userNameSet", res.data.username);

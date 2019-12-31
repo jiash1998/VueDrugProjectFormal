@@ -41,16 +41,18 @@ export default {
           console.log(err);
         });
     },
-    toLMK(value) {
-      var url = "";
+    toLMK() {
+      var url = "http://192.168.43.6:8088/excelcontroller/exportexcel";
+      // var data ={exportsign:value}
       this.axios
-        .post(url, qs.stringify(value), {
+        .post(url,{
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
           }
         })
         .then(res => {
-          console.log(res);
+          console.log("后台返回："+res);
+          alert("导出成功");
         })
         .catch(err => {
           console.log(err);
@@ -63,7 +65,8 @@ export default {
         .then(res => {
           // var self = this;
           // self.getDrug = res.data;
-          this.toLMK(data);
+          // this.toLMK("ExportExcel");
+          this.toLMK();
           require.ensure([], () => {
             const {
               export_json_to_excel

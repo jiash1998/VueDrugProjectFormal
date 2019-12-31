@@ -9,7 +9,7 @@
     </div>
     <div id="main">
       <el-form :model="purchaseForm" :rules="rules" ref="purchaseForm">
-        <el-form-item label="批准文号" prop="purId">
+        <el-form-item label="批准文号" prop="sourcedrugid">
           <!-- <el-autocomplete
             popper-class="my-autocomplete"
             v-model="purchaseForm.purId"
@@ -24,10 +24,10 @@
           </el-autocomplete>-->
           <el-input v-model="purchaseForm.sourcedrugid" placeholder="输入批准文号"></el-input>
         </el-form-item>
-        <el-form-item label="药品规格(g)" prop="purSpe">
+        <el-form-item label="药品规格(g)">
           <el-input v-model="purchaseForm.sourcedrugspe" placeholder="药品规格以g为单位" disabled></el-input>
         </el-form-item>
-        <el-form-item label="生产日期" prop="purDate">
+        <el-form-item label="生产日期" prop="sourcedrugproduct">
           <el-date-picker
             type="date"
             v-model="purchaseForm.sourcedrugproduct"
@@ -51,18 +51,11 @@ export default {
   data() {
     var validateId = (rule, value, callback) => {
       var testZ = /^(H(11|32|33|37)|S(11|32|33|37))\d{6}$/;
-      if (!value || !testZ.test(value)) {
+      if (!value) {
         console.log(value);
+        return callback(new Error("不能为空"));
+      } else if (!testZ.test(value)) {
         return callback(new Error("批准文号(H/S+2位厂家代码+6位数字)"));
-      } else {
-        callback();
-      }
-    };
-    var validateSpe = (rule, value, callback) => {
-      console.log(value);
-      var testZ = /^0+(.[2-5]{1})?$/;
-      if (!value || !testZ.test(value)) {
-        return callback(new Error("规格可选(0.2|0.3|0.4|0.5)"));
       } else {
         callback();
       }
@@ -87,8 +80,7 @@ export default {
         }
       },
       rules: {
-        sourcedrugid: [{ validator: validateId, change: "blur" }],
-        sourcedrugsep: [{ validator: validateSpe, trigger: "blur" }],
+        sourcedrugid: [{ validator: validateId, trigger: "blur" }],
         sourcedrugproduct: [{ validator: validateDate, trigger: "blur" }]
       }
     };
@@ -108,31 +100,40 @@ export default {
     submit: function() {
       var self = this;
       var data = this.purchaseForm;
-      this.axios
-        .post(
-          "http://192.168.43.6:8088/sourcecontroller/selectsourcefromsourcedrugid",
-          qs.stringify(data),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
+      var testId = /^(H(11|32|33|37)|S(11|32|33|37))\d{6}$/;
+      console.log(self.purchaseForm.sourcedrugid);
+      if (self.purchaseForm.sourcedrugid == "" || !testId.test(self.purchaseForm.sourcedrugid)) {
+        alert("请填写正确批准文号");
+      } else {
+        this.axios
+          .post(
+            "http://192.168.43.6:8088/sourcecontroller/selectsourcefromsourcedrugid",
+            qs.stringify(data),
+            {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              }
             }
-          }
-        )
-        .then(res => {
-          this.$store.commit("purchaseDrugInfoModfiy", res);
-          self.purchaseForm = this.$store.state.purchaseDrugInfo.data[0];
-          self.purchaseForm = JSON.parse(JSON.stringify(self.purchaseForm));
-          console.log(this.$store.state.purchaseDrugInfo.data[0].sourcedrugspe);
-        })
-        .catch(err => {
-          console.log(err);
-          alert("查无此药");
-        });
+          )
+          .then(res => {
+            this.$store.commit("purchaseDrugInfoModfiy", res);
+            self.purchaseForm = this.$store.state.purchaseDrugInfo.data[0];
+            self.purchaseForm = JSON.parse(JSON.stringify(self.purchaseForm));
+            console.log(
+              this.$store.state.purchaseDrugInfo.data[0].sourcedrugspe
+            );
+          })
+          .catch(err => {
+            console.log(err);
+            alert("查无此药");
+          });
+      }
     },
     submitCheck: function(formName) {
       this.$refs[formName].validate(valid => {
         var self = this;
         if (valid) {
+          console.log(valid);
           this.$store.commit("activeAdd");
           this.$router.replace("/contral/son2purnext");
         } else {

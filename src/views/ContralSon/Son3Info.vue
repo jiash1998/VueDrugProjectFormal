@@ -7,7 +7,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="drugselect" plain>查询</el-button>
-          <el-button type="primary" native-type="reset" plain>清空信息</el-button>
+          <el-button type="primary" native-type="reset" plain>清空</el-button>
           <el-button
             type="primary"
             @click="submit('InfoForm')"
@@ -135,6 +135,7 @@ export default {
         )
         .then(res => {
           console.log("enter");
+          alert("修改成功");
         })
         .catch(err => {
           console.log(err);
