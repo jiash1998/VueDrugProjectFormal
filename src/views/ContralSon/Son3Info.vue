@@ -89,7 +89,7 @@ export default {
       var data = { drugId: this.InfoForm.drugId };
       this.axios
         .post(
-          "http://192.168.43.6:8088/drugController/selectdrugnumfromdrugid",
+          "http://"+self.$store.state.path+":8088/drugController/selectdrugnumfromdrugid",
           qs.stringify(data),
           {
             headers: {
@@ -125,7 +125,7 @@ export default {
       console.log(data);
       this.axios
         .post(
-          "http://192.168.43.6:8088/drugController/updatedrugnameanddrugnum",
+          "http://"+this.$store.state.path+":8088/drugController/updatedrugnameanddrugnum",
           qs.stringify(data),
           {
             headers: {

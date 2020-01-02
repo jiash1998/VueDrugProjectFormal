@@ -33,7 +33,7 @@ export default {
       var data = { hisopname: this.$store.state.getusername };
       this.axios
         .post(
-          "http://192.168.43.6:8088/historycontroller/selectselfhistory",
+          "http://"+this.$store.state.path+":8088/historycontroller/selectselfhistory",
           qs.stringify(data),
           {
             headers: {

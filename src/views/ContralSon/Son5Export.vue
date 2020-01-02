@@ -31,7 +31,7 @@ export default {
   methods: {
     axiosGet: function() {
       this.axios
-        .get("http://192.168.43.6:8088/drugController/selectAllDrug")
+        .get("http://"+this.$store.state.path+":8088/drugController/selectAllDrug")
         // .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
         .then(res => {
           var self = this;
@@ -42,7 +42,7 @@ export default {
         });
     },
     toLMK() {
-      var url = "http://192.168.43.6:8088/excelcontroller/exportexcel";
+      var url = "http://"+this.$store.state.path+":8088/excelcontroller/exportexcel";
       // var data ={exportsign:value}
       this.axios
         .post(url,{
@@ -60,7 +60,7 @@ export default {
     },
     export2Excel() {
       this.axios
-        .get("http://192.168.43.6:8088/drugController/selectAllDrug")
+        .get("http://"+this.$store.state.path+":8088/drugController/selectAllDrug")
         // .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
         .then(res => {
           // var self = this;

@@ -107,7 +107,7 @@ export default {
       } else {
         this.axios
           .post(
-            "http://192.168.43.6:8088/sourcecontroller/selectsourcefromsourcedrugid",
+            "http://"+self.$store.state.path+":8088/sourcecontroller/selectsourcefromsourcedrugid",
             qs.stringify(data),
             {
               headers: {

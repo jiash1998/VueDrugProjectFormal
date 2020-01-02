@@ -63,9 +63,9 @@ export default {
       let _this = this;
       //判断是否支持websocket，并连接
       if (window.WebSocket) {
-        var serverHot = "192.168.43.6:8088";
+        // var serverHot = "192.168.43.6:8088";
         var url =
-          "ws://192.168.43.6:8088/hello/postname=" +
+          "ws://"+_this.$store.state.path+":8088/hello/postname=" +
           _this.$store.state.getusername+"/postsign=客户端";
         let ws = new WebSocket(url);
         _this.ws = ws;

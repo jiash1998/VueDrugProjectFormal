@@ -80,7 +80,7 @@ export default {
           //axios连接，设置连接头，并使用qs
           this.axios
             .post(
-              "http://192.168.43.6:8088/usercontroller/selectalluserinfo",
+              "http://"+this.$store.state.path+":8088/usercontroller/selectalluserinfo",
               qs.stringify(data),
               {
                 headers: {

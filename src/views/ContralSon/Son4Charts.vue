@@ -30,7 +30,7 @@ export default {
       var seriesDrugName = [];
       this.axios
         // .get("https://jiash1998.github.io/VueDrugProjectFormal/TestData.json")
-        .get("http://192.168.43.6:8088/drugController/selectAllDrug")
+        .get("http://"+this.$store.state.path+":8088/drugController/selectAllDrug")
         .then(res => {
           for (let i = 0; i < res.data.length; i++) {
             legendDrugName.push(res.data[i].drugName);

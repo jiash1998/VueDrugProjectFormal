@@ -175,15 +175,15 @@ export default {
       switch (index) {
         case 0:
           var data = { username: value };
-          var url = "http://192.168.43.6:8088/usercontroller/usernameisexsit";
+          var url = "http://"+this.$store.state.path+":8088/usercontroller/usernameisexsit";
           break;
         case 3:
           var data = { useremail: value };
-          var url = "http://192.168.43.6:8088/usercontroller/useremailisexsit";
+          var url = "http://"+this.$store.state.path+":8088/usercontroller/useremailisexsit";
           break;
         case 4:
           var data = { usertel: value };
-          var url = "http://192.168.43.6:8088/usercontroller/usertelisexsit";
+          var url = "http://"+this.$store.state.path+":8088/usercontroller/usertelisexsit";
           break;
         default:
           console.log("error");
@@ -222,7 +222,7 @@ export default {
       var data2 = { usertel: this.formModel.usertel };
       this.axios
         .post(
-          "http://192.168.43.6:8088/usercontroller/accepttel",
+          "http://"+this.$store.state.path+":8088/usercontroller/accepttel",
           qs.stringify(data2),
           {
             headers: {
@@ -244,7 +244,7 @@ export default {
           console.log(data);
           this.axios
             .post(
-              "http://192.168.43.6:8088/usercontroller/userreginfo",
+              "http://"+this.$store.state.path+":8088/usercontroller/userreginfo",
               qs.stringify(data),
               {
                 headers: {
