@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     //路径封装
-    path:"10.200.75.137",
+    path:"192.168.43.6",
     active: 1,//控制购买步骤条
     btnstate: -1,
     //购买界面根据进货商的药品库存来决定是否显示有药品
@@ -65,6 +65,7 @@ export default new Vuex.Store({
     sourcenameRstroeC(state) {
       return (state.sourcenameC = false);
     },
+    //注册表判断
     postmessmodify(state, payload) {
       return (state.postpass = payload);
     },

@@ -3,6 +3,7 @@
     <div id="main">
       <div style="margin:40px 0 -48px 0;"><el-tag type="primary" effect="dark">客服</el-tag></div>
       <div class="msg-box">
+        <!-- //只有一个信息框，根据人物id，来左右显示 -->
         <div
           class="msg"
           v-for="(item,index) in list"

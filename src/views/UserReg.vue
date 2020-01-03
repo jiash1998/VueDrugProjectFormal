@@ -81,6 +81,7 @@ export default {
       if (!value) {
         return new callback("用户名格式错误");
       } else {
+        // return new callback("用户名已经存在");
         callback();
       }
     };
@@ -115,16 +116,18 @@ export default {
       }
     };
     var validateEmailCheck = (rule, value, callback) => {
-      const standrd = /^\w{6,}@[a-z0-9]{2,3}\.com+$|\,$/;
+      const standrd = /^[1-9]{6,10}@(qq|QQ).com$/;
+      // console.log(standrd.test(value));
       if (!value) {
         this.$store.commit("postemailmodify", "trueemail");
         return new callback("邮箱为空");
       } else if (!standrd.test(value)) {
         this.$store.commit("postemailmodify", "trueemail");
-        callback(new Error("邮箱格式错误"));
+        return new callback("邮箱格式错误");
       } else {
         this.$store.commit("postemailmodify", "falseemail");
-        callback();
+        // callback();
+        return new callback("邮箱已经存在");
       }
     };
     var validatePhoneCheck = (rule, value, callback) => {
@@ -133,11 +136,11 @@ export default {
         this.$store.commit("posttelmodify", "truetel");
         return new callback("手机号为空");
       } else if (!standrd.test(value)) {
-        this.$store.commit("posttellmodify", "truetel");
+        this.$store.commit("posttelmodify", "truetel");
         callback(new Error("手机格式错误"));
       } else {
         this.$store.commit("posttelmodify", "falsetel");
-        callback();
+        return new callback("手机已经存在");
       }
     };
     var validateCodeCheck = (rule, value, callback) => {
@@ -152,11 +155,11 @@ export default {
     };
     return {
       rules: {
-        username: [{ validator: validateName, trigger: "blur" }],
+        username: [{ validator: validateName, trigger: "change" }],
         password: [{ validator: validatePass, trigger: "blur" }],
         passwordcheck: [{ validator: validatePassCheck, trigger: "blur" }],
-        useremail: [{ validator: validateEmailCheck, trigger: "blur" }],
-        usertel: [{ validator: validatePhoneCheck, trigger: "blur" }],
+        useremail: [{ validator: validateEmailCheck, trigger: "change" }],
+        usertel: [{ validator: validatePhoneCheck, trigger: "change" }],
         idcode: [{ validator: validateCodeCheck, trigger: "blur" }]
       },
       formModel: {
@@ -175,15 +178,24 @@ export default {
       switch (index) {
         case 0:
           var data = { username: value };
-          var url = "http://"+this.$store.state.path+":8088/usercontroller/usernameisexsit";
+          var url =
+            "http://" +
+            this.$store.state.path +
+            ":8088/usercontroller/usernameisexsit";
           break;
         case 3:
           var data = { useremail: value };
-          var url = "http://"+this.$store.state.path+":8088/usercontroller/useremailisexsit";
+          var url =
+            "http://" +
+            this.$store.state.path +
+            ":8088/usercontroller/useremailisexsit";
           break;
         case 4:
           var data = { usertel: value };
-          var url = "http://"+this.$store.state.path+":8088/usercontroller/usertelisexsit";
+          var url =
+            "http://" +
+            this.$store.state.path +
+            ":8088/usercontroller/usertelisexsit";
           break;
         default:
           console.log("error");
@@ -205,6 +217,7 @@ export default {
           console.log(err);
         });
     },
+    //将三个框中的数据提交到psottall
     postname(e) {
       this.postall(e.target.value, 0);
       console.log(e.target.form[0]);
@@ -222,7 +235,7 @@ export default {
       var data2 = { usertel: this.formModel.usertel };
       this.axios
         .post(
-          "http://"+this.$store.state.path+":8088/usercontroller/accepttel",
+          "http://" + this.$store.state.path + ":8088/usercontroller/accepttel",
           qs.stringify(data2),
           {
             headers: {
@@ -244,7 +257,9 @@ export default {
           console.log(data);
           this.axios
             .post(
-              "http://"+this.$store.state.path+":8088/usercontroller/userreginfo",
+              "http://" +
+                this.$store.state.path +
+                ":8088/usercontroller/userreginfo",
               qs.stringify(data),
               {
                 headers: {
