@@ -15,6 +15,7 @@
           :disabled="$store.state.btnstate == -1 ? true : false"
           plain
         >
+          <!-- < -->
           <!-- :disabled="$store.state.btnstate == -1 ? true : false" -->
           <router-link to="/contral" tag="span">控 制</router-link>
         </el-button>
